@@ -153,7 +153,7 @@
                     </div>
 
                     <!-- Status -->
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select name="status" class="form-control" id="status" required aria-label="Service Status">
                             <option value="">Select Status</option>
@@ -161,7 +161,7 @@
                             <option value="Confirmed">Confirmed</option>
                             <option value="Completed">Completed</option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary w-100">Book Service</button>

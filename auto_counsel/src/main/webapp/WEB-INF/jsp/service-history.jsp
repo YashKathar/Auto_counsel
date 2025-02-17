@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +33,9 @@
                     </tr>
                 </thead>
                 <tbody id="serviceTableBody">
-                    <c:forEach var="service" items="${previousServices}">
+                    <c:forEach items="${previousServices}" var="service">
                         <tr>
-                            <td>${service.carModel}</td>
+                            <td> ${service.carModel} </td>
                             <td>${service.carName}</td>
                             <td>${service.serviceType}</td>
                             <td>${service.appointmentDate}</td>
@@ -43,7 +46,6 @@
             </table>
         </c:if>
     </div>
-
     <script>
         // JavaScript to count the number of table rows dynamically
         document.getElementById("serviceCount").innerText = 

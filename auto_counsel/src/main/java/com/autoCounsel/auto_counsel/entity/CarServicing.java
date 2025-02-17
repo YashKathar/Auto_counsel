@@ -22,7 +22,13 @@ public class CarServicing {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "car_model", length = 100, nullable = false)
+    @Override
+	public String toString() {
+		return "CarServicing [user=" + user.getFirstName()+" "+user.getLastName() + ", carModel=" + carModel + ", carName=" + carName + ", serviceType="
+				+ serviceType + ", appointmentDate=" + appointmentDate + ", status=" + status + "]";
+	}
+
+	@Column(name = "car_model", length = 100, nullable = false)
     private String carModel;
 
     @Column(name = "car_name", length = 20, nullable = false)
