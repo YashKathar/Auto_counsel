@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AutoCounselApplication<auto_counsel>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.autoCounsel.auto_counsel.AutoCounselApplication",
+            "projectName": "auto_counsel",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
