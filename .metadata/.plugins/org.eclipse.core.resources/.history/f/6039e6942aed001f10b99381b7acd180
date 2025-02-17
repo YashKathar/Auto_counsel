@@ -1,0 +1,61 @@
+package com.autoCounsel.auto_counsel.service;
+
+import java.io.IOException;
+
+ModelMapper;
+import org.springframrt com.autoCounsel.auto_counsel.dao.sellCarRepo;
+import com.autlue;
+import org.springframework.stereotype.Service;
+
+impooCounsel.auto_counsel.dto.SellCarDto;
+
+
+import java.io.IOException;
+
+import org.modelmapper;
+import com.autoCounsel.auto_counsel.dto.SellCarDto;
+import org.springframework.beans.factory.annotation.Value;
+import com.autoCounsel.auto_counsel.entity.SellCar;
+import java.io.File;
+
+@Service
+public class SellCarService {
+
+    @Autowired
+    private sellCarRepo sellCarRepo;
+    
+    @Autowired
+    private ModelMapper modelMapper;
+    
+    @Value("${car.image.path}")
+	private String productImagePath;
+    
+    
+    
+
+    // public Car addCar(Car car){
+    //     return carRepo.save(car);
+    // }
+
+    public SellCar saveSellCar(SellCarDto sellCarDto) {
+    	File directory = new File(productImagePath);
+		if(!directory.exists()) {
+			boolean created = directory.mkdirs();
+			if(created) {
+				
+			}
+			else {
+				
+				throw new IOException("Failed to create Directory : "+productImagePath);
+			}
+		}
+	
+    	
+    	sellCarDto.getCarImage();
+    	
+    	SellCar sellcar = modelMapper.map(sellCarDto, SellCar.class);
+    	
+    	
+        return sellCarRepo.save(sellcar);
+    }
+}

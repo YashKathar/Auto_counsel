@@ -1,0 +1,5 @@
+package com.autoCounsel.auto_counsel.config;
+
+public class AppConfig {
+
+}

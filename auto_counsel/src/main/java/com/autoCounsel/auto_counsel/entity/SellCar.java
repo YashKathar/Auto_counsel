@@ -48,6 +48,9 @@ public class SellCar {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt = LocalDateTime.now();
+    
+    @Column(name = "car_image")
+    private String carImage;
 
     @PreUpdate
     public void setLastUpdate() {

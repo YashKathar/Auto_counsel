@@ -22,7 +22,7 @@ public class AuthenticationController {
 
     @PostMapping(value = "/register")
     public String registerUser(@ModelAttribute User user) {
-        if (null != authenticationService.registerUser(user)) {
+        if ( authenticationService.registerUser(user) != null) {
             return "index";
         }
         return "redirect:/";
@@ -53,7 +53,6 @@ public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user, Htt
 
     Map<String, String> response = new HashMap<>();
     response.put("redirect", loginUser.getRole().equalsIgnoreCase("owner") ? "/auth/dashboard" : "/auth/dashboard");
-    
     return ResponseEntity.ok(response);
 }
 
@@ -61,5 +60,10 @@ public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user, Htt
     @GetMapping(value = "/dashboard")
     public String dashBorPage(){
         return "dashbord";
+    }
+    
+    @GetMapping(value = "/register")
+    public String page(){
+        return "register";
     }
 }

@@ -99,6 +99,7 @@
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+        
     </style>
 </head>
 <body>
@@ -123,13 +124,18 @@
             </div>
 
             <div class="mb-3">
-                <label for="price" class="form-label">Expected Price (₹)</label>
+                <label for="price" class="form-label">Expected Price (&#8377;)</label>
                 <input type="number" class="form-control" id="price" name="price" required>
             </div>
 
             <div class="mb-3">
                 <label for="contactNumber" class="form-label">Contact Number</label>
                 <input type="text" class="form-control" id="contactNumber" name="contactNumber" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="carImage" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="carImage" name="carImage" required>
             </div>
 
             <!-- <div class="mb-3">

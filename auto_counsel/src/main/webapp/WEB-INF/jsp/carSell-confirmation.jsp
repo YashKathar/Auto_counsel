@@ -30,7 +30,7 @@
                         <li class="list-group-item"><strong>Model:</strong> ${sellCar.carModel}</li>
                         <li class="list-group-item"><strong>Name:</strong> ${sellCar.carName}</li>
                         <li class="list-group-item"><strong>Year:</strong> ${sellCar.year}</li>
-                        <li class="list-group-item"><strong>Price:</strong> ₹${sellCar.price}</li>
+                        <li class="list-group-item"><strong>Price:</strong> &#8377;${sellCar.price}</li>
                         <li class="list-group-item"><strong>Contact:</strong> ${sellCar.contactNumber}</li>
                     </ul>
                 </div>

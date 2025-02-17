@@ -1,5 +1,6 @@
 package com.autoCounsel.auto_counsel.controller;
 
+import com.autoCounsel.auto_counsel.dto.*;
 import com.autoCounsel.auto_counsel.dto.CarDto;
 import com.autoCounsel.auto_counsel.entity.Car;
 import com.autoCounsel.auto_counsel.entity.SellCar;
@@ -40,19 +41,19 @@ public class CarController {
 
 
     @PostMapping("/sell")
-    public String sellCar(@ModelAttribute SellCar sellCar, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String sellCar(@ModelAttribute SellCarDto sellCarDto, RedirectAttributes redirectAttributes, HttpSession session) {
     try {      
         User loggedInUser = (User) session.getAttribute("user");
 
-        sellCar.setUser(loggedInUser);
+        sellCarDto.setUser(loggedInUser);
 
-        sellCarService.saveSellCar(sellCar);
+        sellCarService.saveSellCar(sellCarDto);
 
         redirectAttributes.addFlashAttribute("message", "Your car has been listed for sale successfully!");
-        redirectAttributes.addFlashAttribute("carModel", sellCar.getCarModel());
-        redirectAttributes.addFlashAttribute("carName", sellCar.getCarName());
-        redirectAttributes.addFlashAttribute("year", sellCar.getYear());
-        redirectAttributes.addFlashAttribute("price", sellCar.getPrice());
+        redirectAttributes.addFlashAttribute("carModel", sellCarDto.getCarModel());
+        redirectAttributes.addFlashAttribute("carName", sellCarDto.getCarName());
+        redirectAttributes.addFlashAttribute("year", sellCarDto.getYear());
+        redirectAttributes.addFlashAttribute("price", sellCarDto.getPrice());
 
         return "carSell-confirmation";
        } catch (Exception e) {

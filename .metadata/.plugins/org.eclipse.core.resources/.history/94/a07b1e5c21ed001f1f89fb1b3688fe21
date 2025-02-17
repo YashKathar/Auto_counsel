@@ -1,0 +1,5 @@
+package com.autoCounsel.auto_counsel.dto;
+
+public class SellCarDto {
+
+}
