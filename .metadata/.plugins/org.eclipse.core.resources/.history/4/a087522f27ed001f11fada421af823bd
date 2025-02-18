@@ -1,0 +1,39 @@
+package com.autoCounsel.auto_counsel.service;
+
+import com.autoCounsel.auto_counsel.dao.sellCarRepo;
+import org.modelmapper.ModelMapper;
+import com.autoCounsel.auto_counsel.dto.*;
+import com.autoCounsel.auto_counsel.entity.SellCar;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SellCarService {
+
+    @Autowired
+    private sellCarRepo sellCarRepo;
+    
+    @Autowired
+    private ModelMapper modelMapper;
+    
+    @Value("${car.image.path}")
+	private String productImagePath;
+    
+    
+    
+
+    // public Car addCar(Car car){
+    //     return carRepo.save(car);
+    // }
+
+    public SellCar saveSellCar(SellCarDto sellCarDto) {
+    	
+    	sellCarDto.getCarImage();
+    	
+    	SellCar sellcar = modelMapper.map(sellCarDto, SellCar.class);
+    	
+    	
+        return sellCarRepo.save(sellcar);
+    }
+}

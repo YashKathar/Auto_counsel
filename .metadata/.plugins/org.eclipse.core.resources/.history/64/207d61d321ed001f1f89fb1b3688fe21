@@ -1,0 +1,18 @@
+package com.autoCounsel.auto_counsel.dto;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import jakarta.persistence.Lob;
+
+public class SellCarDto {
+    private String carModel;
+    private String carName;
+    private int year;
+    private BigDecimal price;
+    private String contactNumber;
+    private String imageUrl;
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();   
+    @Lob
+    private String carImage;
+}

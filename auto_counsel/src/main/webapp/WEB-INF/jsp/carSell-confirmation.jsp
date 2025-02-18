@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -24,13 +26,18 @@
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                        <img src="<c:url value='/car/image/${sellCar.id}' />" class="img-fluid rounded" alt="Car Image" style="max-height: 200px;">
+                    
+                       <%-- <img src="${resource}" class="img-fluid rounded" alt="Car Image" style="max-height: 200px;"> --%>
+                       <img src="data:image/jpeg;base64,${resource}" 
+     class="img-fluid rounded" alt="Car Image" style="max-height: 200px;">
+
+                       
                     </div>
                     <ul class="list-group list-group-flush mt-3">
                         <li class="list-group-item"><strong>Model:</strong> ${sellCar.carModel}</li>
                         <li class="list-group-item"><strong>Name:</strong> ${sellCar.carName}</li>
                         <li class="list-group-item"><strong>Year:</strong> ${sellCar.year}</li>
-                        <li class="list-group-item"><strong>Price:</strong> ₹${sellCar.price}</li>
+                        <li class="list-group-item"><strong>Price:</strong> &#8377;${sellCar.price}</li>
                         <li class="list-group-item"><strong>Contact:</strong> ${sellCar.contactNumber}</li>
                     </ul>
                 </div>

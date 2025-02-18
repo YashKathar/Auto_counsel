@@ -1,6 +1,7 @@
 package com.autoCounsel.auto_counsel.service;
 
 import com.autoCounsel.auto_counsel.dao.UserRepo;
+import org.modelmapper.ModelMapper;
 import com.autoCounsel.auto_counsel.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,14 @@ public class AuthenticationService {
 
     @Autowired
     private UserRepo userRepo;
+    
+    @Autowired 
+    private ModelMapper modelMapper;
 
     public User registerUser(User user) {
 
         try {
+        	user.setRole("ROLE_CUSTOMER");
             return userRepo.save(user);
 
         } catch (Exception e) {
