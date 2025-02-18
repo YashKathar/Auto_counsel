@@ -109,8 +109,9 @@
             <p><strong>Service Type:</strong> ${serviceType}</p>
             <p><strong>Appointment Date:</strong> 
                 <fmt:formatDate value="${appointmentDate}" pattern="yyyy-MM-dd" var="formattedDate" />
-                ${formattedDate}
+                ${appointmentDate}
             </p>
+            <p><strong>Garage:</strong> ${garage}</p>
         </div>
 
         <a href="/carsService/book-service" class="btn btn-custom">Book Another Service</a>
