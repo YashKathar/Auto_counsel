@@ -3,16 +3,19 @@ package com.autoCounsel.auto_counsel.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.autoCounsel.auto_counsel.dto.CarServicingDto;
 import com.autoCounsel.auto_counsel.entity.CarServicing;
+import com.autoCounsel.auto_counsel.entity.Garage;
 import com.autoCounsel.auto_counsel.entity.User;
 import com.autoCounsel.auto_counsel.service.CarServicingService;
+import com.autoCounsel.auto_counsel.service.GarageService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,9 +25,14 @@ public class CarServiceController {
 
     @Autowired
     private CarServicingService carServicingService;
+    
+    @Autowired
+    private GarageService garageService;
 
     @GetMapping("/book-service")
-    public String showBookingForm() {
+    public String showBookingForm(Model model) {
+    	List<Garage> garages = garageService.getGarages();
+    	model.addAttribute("garages", garages);
         return "book-service"; 
     }
 
@@ -34,8 +42,8 @@ public class CarServiceController {
             
             User loggedInUser = (User) session.getAttribute("user");
 
+            carServicing.setStatus("Confirmed");
             carServicing.setUser(loggedInUser);
-
 
             // Book the service and save it
             carServicingService.bookCarService(carServicing);
@@ -46,6 +54,7 @@ public class CarServiceController {
             redirectAttributes.addFlashAttribute("carName", carServicing.getCarName());
             redirectAttributes.addFlashAttribute("serviceType", carServicing.getServiceType());
             redirectAttributes.addFlashAttribute("appointmentDate", carServicing.getAppointmentDate());
+            redirectAttributes.addFlashAttribute("garage", carServicing.getGarage().getGarageName());
 
             // Redirect to the confirmation page
             return "redirect:/carsService/booking-confirmation";
@@ -58,6 +67,7 @@ public class CarServiceController {
     @GetMapping("/booking-confirmation")
     public String showConfirmationPage(Model model) {
         // This page will use the flash attributes to show the confirmation message
+    	System.out.print(model);
         return "booking-confirmation";
     }
 
