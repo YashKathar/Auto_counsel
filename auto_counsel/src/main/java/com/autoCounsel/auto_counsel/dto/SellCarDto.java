@@ -3,6 +3,8 @@ package com.autoCounsel.auto_counsel.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.autoCounsel.auto_counsel.entity.User;
 
 import jakarta.persistence.JoinColumn;
@@ -20,8 +22,7 @@ public class SellCarDto {
     private String imageUrl;
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();   
-    @Lob
-    private String carImage;
+    private MultipartFile carImage;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // Reference to the seller

@@ -40,8 +40,8 @@ public class SellCar {
     @Column(name = "contact_number", nullable = false, length = 15)
     private String contactNumber;
 
-    @Column(name = "image_url", length = 255)
-    private String imageUrl; // Store image path
+//    @Column(name = "image_url", length = 255)
+//    private String imageUrl; // Store image path
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

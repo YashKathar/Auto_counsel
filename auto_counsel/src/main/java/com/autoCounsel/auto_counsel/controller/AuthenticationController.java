@@ -39,7 +39,7 @@ public class AuthenticationController {
     // }
 
 
-    @PostMapping(value = "/login")
+@PostMapping(value = "/login")
 @ResponseBody
 public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user, HttpSession session) {
     User loginUser = authenticationService.loginUser(user);
