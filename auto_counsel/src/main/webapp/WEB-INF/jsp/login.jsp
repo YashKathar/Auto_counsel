@@ -111,8 +111,11 @@
         }
 
         .btn:hover {
-            background-color: #E66900;
-        }
+                    background-color: #FF7E00;
+                    opacity: 0.8;
+                    transform: scale(1.05);
+                    color: white;
+                }
 
         .text-center {
             margin-top: 1rem;

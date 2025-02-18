@@ -37,9 +37,16 @@ public class CarServicing {
     @Column(name = "status", length = 45, nullable = false)
     private String status = "Confirmed";
     
-    @Override
+    @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "garage")
+	 private Garage garage;
+
+	@Override
 	public String toString() {
-		return "CarServicing [user=" + user.getFirstName()+" "+user.getLastName() + ", carModel=" + carModel + ", carName=" + carName + ", serviceType="
-				+ serviceType + ", appointmentDate=" + appointmentDate + ", status=" + status + "]";
+		return "CarServicing [id=" + id + ", user=" + user + ", carModel=" + carModel + ", carName=" + carName
+				+ ", serviceType=" + serviceType + ", appointmentDate=" + appointmentDate + ", status=" + status
+				+ ", garage=" + garage + "]";
 	}
+    
+   
 }

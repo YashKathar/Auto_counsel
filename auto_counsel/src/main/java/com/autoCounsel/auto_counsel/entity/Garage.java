@@ -36,7 +36,4 @@ public class Garage {
 	 @Column(name = "garage_address", length = 255, nullable = false)
 	 private String garageAddress;
 	 
-	 @OneToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name = "car_servicing")
-	 private CarServicing carService;
 }

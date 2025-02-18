@@ -30,6 +30,7 @@
                         <th>Service Type</th>
                         <th>Appointment Date</th>
                         <th>Status</th>
+                        <th>Garage</th>
                     </tr>
                 </thead>
                 <tbody id="serviceTableBody">
@@ -40,6 +41,7 @@
                             <td>${service.serviceType}</td>
                             <td>${service.appointmentDate}</td>
                             <td>${service.status}</td>
+                            <td>${service.garage.garageName}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
