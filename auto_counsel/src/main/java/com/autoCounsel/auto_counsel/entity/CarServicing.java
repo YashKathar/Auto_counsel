@@ -22,12 +22,6 @@ public class CarServicing {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Override
-	public String toString() {
-		return "CarServicing [user=" + user.getFirstName()+" "+user.getLastName() + ", carModel=" + carModel + ", carName=" + carName + ", serviceType="
-				+ serviceType + ", appointmentDate=" + appointmentDate + ", status=" + status + "]";
-	}
-
 	@Column(name = "car_model", length = 100, nullable = false)
     private String carModel;
 
@@ -41,5 +35,11 @@ public class CarServicing {
     private LocalDate appointmentDate;
 
     @Column(name = "status", length = 45, nullable = false)
-    private String status = "Pending";
+    private String status = "Confirmed";
+    
+    @Override
+	public String toString() {
+		return "CarServicing [user=" + user.getFirstName()+" "+user.getLastName() + ", carModel=" + carModel + ", carName=" + carName + ", serviceType="
+				+ serviceType + ", appointmentDate=" + appointmentDate + ", status=" + status + "]";
+	}
 }
