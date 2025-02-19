@@ -18,6 +18,7 @@ import com.autoCounsel.auto_counsel.dto.SellCarDto;
 import com.autoCounsel.auto_counsel.entity.Car;
 import com.autoCounsel.auto_counsel.entity.SellCar;
 import com.autoCounsel.auto_counsel.entity.User;
+import com.autoCounsel.auto_counsel.enums.FuelType;
 import com.autoCounsel.auto_counsel.service.SellCarService;
 
 import jakarta.servlet.http.HttpSession;
@@ -42,6 +43,7 @@ public class CarController {
 
     @GetMapping("/sellCar")
     public String getList(@ModelAttribute Car car, Model model) {
+    	model.addAttribute("fuelType", FuelType.values());
         return "sellCar";
     }
 

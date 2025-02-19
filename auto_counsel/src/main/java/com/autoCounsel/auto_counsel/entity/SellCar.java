@@ -5,6 +5,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.autoCounsel.auto_counsel.enums.FuelType;
+
 
 @Entity
 @Getter
@@ -39,6 +41,9 @@ public class SellCar {
 
     @Column(name = "contact_number", nullable = false, length = 15)
     private String contactNumber;
+    
+    @Enumerated(EnumType.STRING)
+    private FuelType fuelType;
 
 //    @Column(name = "image_url", length = 255)
 //    private String imageUrl; // Store image path

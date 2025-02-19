@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.autoCounsel.auto_counsel.entity.User;
+import com.autoCounsel.auto_counsel.enums.FuelType;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
@@ -19,7 +20,7 @@ public class SellCarDto {
     private int year;
     private BigDecimal price;
     private String contactNumber;
-    private String imageUrl;
+    private FuelType fuelType;
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();   
     private MultipartFile carImage;

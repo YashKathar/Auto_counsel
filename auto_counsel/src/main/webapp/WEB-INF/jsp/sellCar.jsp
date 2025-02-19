@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,11 +131,22 @@
                 <input type="number" class="form-control" id="price" name="price" required>
             </div>
 
+			<div class="mb-3">
+                <label for="fuelType" class="form-label">Fuel Type</label>
+               <select class="form-control" id="fuelType" name="fuelType" required>
+               			<option value="">Choose</option>
+               		<c:forEach var="item" items="${fuelType}">
+               			<option value="${item}">${item}</option>
+               		</c:forEach>
+               </select>
+            </div>
+            
             <div class="mb-3">
                 <label for="contactNumber" class="form-label">Contact Number</label>
                 <input type="text" class="form-control" id="contactNumber" name="contactNumber" required>
             </div>
-
+			
+            
             <div class="mb-3">
                 <label for="carImage" class="form-label">Upload Image</label>
                 <input type="file" class="form-control" id="carImage" name="carImage" required>
