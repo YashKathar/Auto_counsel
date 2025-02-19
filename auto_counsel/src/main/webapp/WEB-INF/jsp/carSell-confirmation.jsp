@@ -12,11 +12,11 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Car Listed Successfully!</h2>
 
-    <c:if test="${not empty message}">
+   <%--  <c:if test="${not empty message}">
         <div class="alert alert-success" role="alert">
             ${message}
         </div>
-    </c:if>
+    </c:if> --%>
 
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -42,8 +42,8 @@
                     </ul>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="<c:url value='/cars/list' />" class="btn btn-success">View All Listings</a>
-                    <a href="<c:url value='/cars/sell' />" class="btn btn-primary">Sell Another Car</a>
+                    <a href="<c:url value='/auth/dashboard' />" class="btn btn-success">View All Listings</a>
+                    <a href="<c:url value='/cars/sellCar' />" class="btn btn-primary">Sell Another Car</a>
                 </div>
             </div>
         </div>

@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -49,18 +53,20 @@ public class SellCarService {
     	System.out.println("fileName :"+fileName);
     	
     	//then add full path
-    	String fullPathString = productImagePath+fileName;
+    	Path path = Paths.get(productImagePath, fileName);
+//    	String fullPathString = productImagePath+fileName;
     	
     	// store the image in the given path 
-    	File imageFullPathFile = new File(fullPathString);
+//    	File imageFullPathFile = new File(fullPathString);
+//    	
+//    	try(FileOutputStream fos = new FileOutputStream(imageFullPathFile)){
+//    		fos.write(carImage.getBytes());
+//    	}
     	
-    	try(FileOutputStream fos = new FileOutputStream(imageFullPathFile)){
-    		fos.write(carImage.getBytes());
-    	}
-    	
+    	Files.copy(carImage.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
     	SellCar sellCar = modelMapper.map(sellCarDto, SellCar.class);
     	//store the path in database
-    	sellCar.setCarImage(fullPathString);
+    	sellCar.setCarImage(path.toString());
     	
         return sellCarRepo.save(sellCar);
         
