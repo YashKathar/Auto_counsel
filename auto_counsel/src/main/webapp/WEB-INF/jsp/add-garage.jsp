@@ -16,6 +16,7 @@
             <div class="continer">
                 <div class="row">
                     <h1>Add Garage</h1>
+                    ${carName}
                     <form:form method="post" modelAttribute="garage">
 
                         <form:input type="hidden" path="id" />

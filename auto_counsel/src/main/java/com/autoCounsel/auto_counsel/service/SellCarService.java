@@ -1,20 +1,20 @@
 package com.autoCounsel.auto_counsel.service;
 
-import java.io.IOException;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.autoCounsel.auto_counsel.dto.SellCarDto;
-import org.springframework.beans.factory.annotation.Value;
-import com.autoCounsel.auto_counsel.entity.SellCar;
-import com.autoCounsel.auto_counsel.dao.sellCarRepo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.autoCounsel.auto_counsel.dao.sellCarRepo;
+import com.autoCounsel.auto_counsel.dto.SellCarDto;
+import com.autoCounsel.auto_counsel.entity.SellCar;
 
 @Service
 public class SellCarService {
@@ -64,5 +64,10 @@ public class SellCarService {
     	
         return sellCarRepo.save(sellCar);
         
+    }
+    
+    
+    public List<SellCar> getOnSellCarByNameAndModel(String carName, String carModel) {
+    	return sellCarRepo.findByCarNameAndCarModel(carName, carModel);
     }
 }

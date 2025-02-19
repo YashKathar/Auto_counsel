@@ -1,28 +1,26 @@
 package com.autoCounsel.auto_counsel.controller;
 
-import com.autoCounsel.auto_counsel.dto.*;
-import com.autoCounsel.auto_counsel.dto.CarDto;
+import java.io.File;
+import java.nio.file.Files;
+import java.util.Base64;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.autoCounsel.auto_counsel.dto.SellCarDto;
 import com.autoCounsel.auto_counsel.entity.Car;
 import com.autoCounsel.auto_counsel.entity.SellCar;
+import com.autoCounsel.auto_counsel.entity.User;
 import com.autoCounsel.auto_counsel.service.SellCarService;
 
 import jakarta.servlet.http.HttpSession;
-
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import com.autoCounsel.auto_counsel.entity.User;
-
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/cars")
@@ -89,10 +87,24 @@ public class CarController {
 
 @GetMapping("/buyCar")
 public String getList( Model model) {
+	model.addAttribute("carName", "Enter car name");
+	model.addAttribute("carModel", "Enter car model");
+	model.addAttribute("fuelType", "Choose..");
     return "buyCar";
 }
 
-
+@PostMapping("/buyCar")
+public String getListOfCars(Model model, String carName, String carModel, String fuelType) {
+	if(fuelType.length() == 0) {
+		fuelType = "Choose..";
+	}
+	model.addAttribute("carName", carName);
+	model.addAttribute("carModel", carModel);
+	model.addAttribute("fuelType", fuelType);
+	List<SellCar> carList = sellCarService.getOnSellCarByNameAndModel(carName, carModel);
+	model.addAttribute("carList", carList);
+    return "buyCar";
+}
 
 
      

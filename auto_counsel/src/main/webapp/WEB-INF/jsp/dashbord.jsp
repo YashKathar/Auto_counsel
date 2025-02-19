@@ -178,21 +178,26 @@
 							<input type="text" class="form-control form_input"
 								placeholder="Brand">
 						</div>
-						<div class="col">
+						<!-- <div class="col">
 							<input type="text" class="form-control form_input"
 								placeholder="price-range">
-						</div>
+						</div> -->
 						<div class="col">
 							<input type="text" id="model" name="model" class="form-control" placeholder="Enter model name" required>
 						</div>
 						<div class="col">
-							<input type="text" class="form-control form_input"
-								placeholder="Fuel Type">
+							<!-- <label for="fuelType" class="form-label">Fuel Type</label> -->
+							<select name="fuelType" id="fuelType" class="form-control form_input">
+								<option value="petrol">Petrol</option>
+								<option value="ev">Eletric</option>
+								<option value="deasel">Deasel</option>
+							</select>
 						</div>
 						
 						<div class="col">
-							<input type="button" class="form-control search_btn"
-								value="Search">
+							<button class="form-control search_btn">
+								Search
+							</button>
 						</div>
 					</div>
 				</form>
