@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.autoCounsel.auto_counsel.dao.sellCarRepo;
+import com.autoCounsel.auto_counsel.dto.SearchCarDto;
 import com.autoCounsel.auto_counsel.dto.SellCarDto;
 import com.autoCounsel.auto_counsel.entity.SellCar;
 
@@ -73,7 +74,11 @@ public class SellCarService {
     }
     
     
-    public List<SellCar> getOnSellCarByNameAndModel(String carName, String carModel) {
-    	return sellCarRepo.findByCarNameAndCarModel(carName, carModel);
+    public List<SellCar> getSearchedCar(SearchCarDto searchCarDto) {
+    	if(searchCarDto.getFuelType() ==null) {
+    		return sellCarRepo.filterCarsExceptFueltype(searchCarDto.getCarName(), searchCarDto.getCarModel());
+    	}
+    	List<SellCar> filterCars = sellCarRepo.filterCars(searchCarDto.getCarName(), searchCarDto.getCarModel(), searchCarDto.getFuelType());
+    	return filterCars;
     }
 }

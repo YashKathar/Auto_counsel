@@ -41,4 +41,5 @@ public class User {
     
     @Column(name = "role", length = 45)
     private String role;
+    
 }

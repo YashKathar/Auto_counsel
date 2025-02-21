@@ -56,6 +56,7 @@ public class SellCar {
     
     @Column(name = "car_image")
     private String carImage;
+    
 
     @PreUpdate
     public void setLastUpdate() {

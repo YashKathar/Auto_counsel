@@ -149,7 +149,7 @@
             
             <div class="mb-3">
                 <label for="carImage" class="form-label">Upload Image</label>
-                <input type="file" class="form-control" id="carImage" name="carImage" required>
+                <input type="file" class="form-control" id="carImage" name="carImage" accept="image/png, image/jpeg" required>
             </div>
 
             <!-- <div class="mb-3">

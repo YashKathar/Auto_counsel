@@ -1,12 +1,16 @@
 package com.autoCounsel.auto_counsel.controller;
 
 import com.autoCounsel.auto_counsel.entity.User;
+import com.autoCounsel.auto_counsel.enums.FuelType;
 import com.autoCounsel.auto_counsel.service.AuthenticationService;
+
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -58,7 +62,8 @@ public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user, Htt
 
 
     @GetMapping(value = "/dashboard")
-    public String dashBorPage(){
+    public String dashBorPage(Model model){
+    	model.addAttribute("fuelType", FuelType.values());
         return "dashbord";
     }
     

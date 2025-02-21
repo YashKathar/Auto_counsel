@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -169,30 +171,34 @@
 			<div class="form_blur"></div>
 			<div class="form">
 				<h2>Find and Buy Cars, Auto Parts and services</h2>
-				<form action="/cars/buy" method="POST" class="p-4 border rounded shadow">
+				<form action="/cars/buyCar" method="POST" modelAttribute="searchCarDto" class="p-4 border rounded shadow">
 				<div class=" ">
-						<div class="col">
-							<input type="text" id="car" name="car" class="form-control" placeholder="Enter car name">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control form_input"
-								placeholder="Brand">
-						</div>
-						<!-- <div class="col">
-							<input type="text" class="form-control form_input"
-								placeholder="price-range">
-						</div> -->
-						<div class="col">
-							<input type="text" id="model" name="model" class="form-control" placeholder="Enter model name" required>
-						</div>
-						<div class="col">
-							<!-- <label for="fuelType" class="form-label">Fuel Type</label> -->
-							<select name="fuelType" id="fuelType" class="form-control form_input">
-								<option value="petrol">Petrol</option>
-								<option value="ev">Eletric</option>
-								<option value="deasel">Deasel</option>
-							</select>
-						</div>
+					<div class="mb-3">
+    
+						<!-- <label for="carName">Car Name</label> -->
+						<input type="text" id="carName" name="carName" path="carName" class="form-control" placeholder="Enter car name" >
+					</div>
+					
+					<div class="mb-3">
+						<!-- <label for="carModel" class="form-label">Car Model</label> -->
+						<input type="text" id="carModel" name="carModel" path="carModel" class="form-control" placeholder="Enter car model" >
+					</div>
+
+					<div class="mb-3">
+						<!-- <label for="carBrand" class="form-label">Car Model</label> -->
+						<input type="text" id="carBrand" name="carBrand" path="carBrand" class="form-control" placeholder="Enter car brand" >
+					</div>
+					
+					<div class="mb-3">
+						<!-- <label for="fuelType" class="form-label">Fuel Type</label> -->
+						<select id="fuelType" name="fuelType" path="fuelType" class="form-control">
+							<option value="">choose</option>
+							<c:forEach var="item" items="${fuelType}">
+								<option value="${item}">${item}</option>
+							</c:forEach>
+						</select>
+					</div>
+					
 						
 						<div class="col">
 							<button class="form-control search_btn">

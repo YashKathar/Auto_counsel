@@ -1,10 +1,14 @@
 package com.autoCounsel.auto_counsel.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.autoCounsel.auto_counsel.dto.SearchCarDto;
 import com.autoCounsel.auto_counsel.dto.SellCarDto;
+import com.autoCounsel.auto_counsel.dto.SearchedCarResponseDto;
 import com.autoCounsel.auto_counsel.entity.Car;
 import com.autoCounsel.auto_counsel.entity.SellCar;
 import com.autoCounsel.auto_counsel.entity.User;
@@ -29,6 +35,9 @@ public class CarController {
 
     @Autowired
     private SellCarService sellCarService;
+    
+    @Autowired
+    private ModelMapper modelMapper; 
 
 //    @PostMapping("/save")
 //     public String save(@ModelAttribute CarDto car, Model model) {
@@ -96,16 +105,19 @@ public String getList( Model model) {
 }
 
 @PostMapping("/buyCar")
-public String getListOfCars(Model model, String carName, String carModel, String fuelType) {
-	if(fuelType.length() == 0) {
-		fuelType = "Choose..";
-	}
-	model.addAttribute("carName", carName);
-	model.addAttribute("carModel", carModel);
-	model.addAttribute("fuelType", fuelType);
-	List<SellCar> carList = sellCarService.getOnSellCarByNameAndModel(carName, carModel);
-	model.addAttribute("carList", carList);
-    return "buyCar";
+public String getListOfCars(SearchCarDto searchCarDto, Model model) throws IOException {
+	List<SellCar> listSellCar =sellCarService.getSearchedCar(searchCarDto);
+	List<SearchedCarResponseDto> listSearchedCarResponseDto = new ArrayList<>();
+	for(SellCar c: listSellCar) {
+		String carImage = c.getCarImage();
+		byte[] allBytes = Files.readAllBytes(Paths.get(carImage));
+		SearchedCarResponseDto searchedCarResponseDto = modelMapper.map(c, SearchedCarResponseDto.class);
+		String carImageString = Base64.getEncoder().encodeToString(allBytes);
+		searchedCarResponseDto.setCarImage(carImageString);
+		listSearchedCarResponseDto.add(searchedCarResponseDto);
+	}	
+	model.addAttribute("searchedCar", listSearchedCarResponseDto); 
+	return "buyCar";
 }
 
 
