@@ -10,6 +10,7 @@
             <title>Sell Your Car</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
         </head>
+        <%@ include file="common/navbar.jspf" %>
 
         <style>
 
@@ -38,6 +39,7 @@
         </style>
 
         <body>
+            <%-- <%@ include file="common/navbar.jspf" %> --%>
             <div class="container">
                 <div class="row">
                     <div class="col-10 col-md-8 offset-1 offset-md-2 mt-5 rounded custom-form pb-5 pt-5 shadow-lg">
@@ -68,11 +70,22 @@
                                     placeholder="Enter Car Price" required>
                             </div>
 
+                          
+
                             <div class="mb-3">
                                 <!-- <label for="fuelType" class="form-label">Fuel Type</label> -->
                                 <select class="form-control custom-height" id="fuelType" name="fuelType" required>
-                                    <option value="">Choose</option>
+                                    <option value="">Fuel type</option>
                                     <c:forEach var="item" items="${fuelType}">
+                                        <option value="${item}">${item}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <!-- <label for="fuelType" class="form-label">Fuel Type</label> -->
+                                <select class="form-control custom-height" id="transmission" name="transmission" required>
+                                    <option value="">Transmission</option>
+                                    <c:forEach var="item" items="${transmission}">
                                         <option value="${item}">${item}</option>
                                     </c:forEach>
                                 </select>

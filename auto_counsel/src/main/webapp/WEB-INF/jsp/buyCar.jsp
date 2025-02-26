@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
   <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    
       <!DOCTYPE html>
       <html lang="en">
 
@@ -11,6 +12,7 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <title>Document</title>
       </head>
+      <%@ include file="common/navbar.jspf" %>
       <style>
         body {
           background-color: lavender;
@@ -100,9 +102,9 @@
             </section> --%>
 
             <div class="container mt-5 mb-5">
-              <div class="row row-cols-1 row-cols-md-2 g-5">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
                 <c:forEach items="${searchedCar}" var="car">
-                  <div class="col-md-4">
+                  <div class="">
                     <div class="card card-class shadow p-3 mb-5 bg-body-tertiary rounded">
                       <img src="data:image/jpeg;base64,${car.carImage}" class="card-img-top card-img-man"
                         alt="No Image">
@@ -140,41 +142,50 @@
 
             <div class="container">
               <div class="row">
+                <c:choose>
+                  <c:when test="${totalPages > 0}">
                 <div class="col-4 col-md-3 offset-7 offset-md-9">
                   <ul class="pagination">
-                    <c:if test="${currentPage > 0}">
-                      <li class="page-item">
-                        <a class="page-link"
-                          href="buyCar?pageNumber=${currentPage - 1}&pageSize=${pageSize}">Previous</a>
-                      </li>
-                    </c:if>
-                    <c:if test="${currentPage == 0}">
-                      <li class="page-item">
-                        <a class="page-link disabled"
-                          href="buyCar?pageNumber=${currentPage - 1}&pageSize=${pageSize}">Previous</a>
-                      </li>
-                    </c:if>
-
-                    <c:forEach var="i" begin="0" end="${totalPages - 1}">
-                      <li class="page-item ${currentPage == i ? 'active' : ''}">
-                        <a class="page-link" href="buyCar?pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
-                      </li>
-                    </c:forEach>
-
-                    <c:if test="${currentPage < totalPages - 1}">
-                      <li class="page-item">
-                        <a class="page-link" href="buyCar?pageNumber=${currentPage + 1}&pageSize=${pageSize}">Next</a>
-                      </li>
-                    </c:if>
-                    <c:if test="${currentPage == totalPages - 1}">
-                      <li class="page-item">
-                        <a class="page-link disabled"
-                          href="buyCar?pageNumber=${currentPage + 1}&pageSize=${pageSize}">Next</a>
-                      </li>
-                    </c:if>
-                  </ul>
-                </div>
-              </div>
+                   
+                                           <c:if test="${currentPage > 0}">
+                        <li class="page-item">
+                          <a class="page-link"
+                            href="buyCar?pageNumber=${currentPage - 1}&pageSize=${pageSize}">Previous</a>
+                        </li>
+                      </c:if>
+                      <c:if test="${currentPage == 0}">
+                        <li class="page-item">
+                          <a class="page-link disabled"
+                            href="buyCar?pageNumber=${currentPage - 1}&pageSize=${pageSize}">Previous</a>
+                        </li>
+                      </c:if>
+  
+                      
+                        <c:forEach var="i" begin="0" end="${totalPages - 1}">
+                          <li class="page-item ${currentPage == i ? 'active' : ''}">
+                            <a class="page-link" href="buyCar?pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
+                          </li>
+                        </c:forEach>
+  
+                        <c:if test="${currentPage < totalPages - 1}">
+                          <li class="page-item">
+                            <a class="page-link" href="buyCar?pageNumber=${currentPage + 1}&pageSize=${pageSize}">Next</a>
+                          </li>
+                        </c:if>
+                        <c:if test="${currentPage == totalPages - 1}">
+                          <li class="page-item">
+                            <a class="page-link disabled"
+                              href="buyCar?pageNumber=${currentPage + 1}&pageSize=${pageSize}">Next</a>
+                          </li>
+                        </c:if>
+                      </ul>
+                    </div>
+                  </div>
+                </c:when>
+                <c:otherwise>
+                  <h1 class="text-center">There is no Car Available</h1>
+                </c:otherwise>
+            </c:choose>
             </div>
 
 

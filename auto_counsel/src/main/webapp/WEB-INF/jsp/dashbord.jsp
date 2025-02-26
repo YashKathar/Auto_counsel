@@ -27,11 +27,10 @@
 
 
 		</head>
-
-
+		
 		<body>
 
-			<section id="header">
+			<%-- <section id="header">
 				<div class="container-fluid">
 					<div class="row no-gutters">
 						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -95,7 +94,8 @@
 
 					</div>
 				</div>
-			</section>
+			</section> --%>
+			<%@ include file="common/navbar.jspf" %>
 
 			<section id="banner_form">
 				<div class="" style="width: 100%;">

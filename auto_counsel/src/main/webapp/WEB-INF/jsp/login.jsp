@@ -93,12 +93,8 @@
             border: none;
             border-radius: 8px;
             /* background: rgba(255, 255, 255, 0.2); */
-            color: #fff;
+            /* color: #fff; */
             outline: none;
-        }
-
-        .form-group input:focus {
-            background: rgba(255, 255, 255, 0.3);
         }
 
         .btn {

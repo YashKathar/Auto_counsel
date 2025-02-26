@@ -8,6 +8,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Create</title>
         </head>
+        <%@ include file="common/navbar.jspf" %>
 
         <body>
             <div class="container">
@@ -41,6 +42,7 @@
                                     </c:forEach>
                                 </select>
                             </div>
+
                             <input type="text" class="form-control" id="car" name="car" path="car"
                                 value="${order.car}" required hidden>
 
