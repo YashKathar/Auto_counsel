@@ -6,65 +6,71 @@
 
         <head>
             <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Sell Your Car</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-            <style>
-                body {
-                    background-color: lavender;
-                }
-
-                .bg-form {
-                    border-radius: 20px !important;
-                    padding: 20px;
-                }
-
-                .SellCar {
-                    text-align: center;
-                    font-weight: bold;
-                }
-            </style>
         </head>
+
+        <style>
+
+            .custom-form {
+                background-color: #686868c7;
+                color: white;
+            }       
+
+            .custom-height {
+                min-height: 50px;
+            }
+
+            /* .button {
+                display: flex;
+                justify-content: center;
+            } */
+
+            .submit-btn {
+                background-color: #f99c32;
+                color: white;
+                &:not(.disable):hover {
+                    background-color: #f99c32;
+                    color: white;
+                }
+            }
+        </style>
 
         <body>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 offset-lg-3 mt-5 bg-form shadow mb-5 bg-white rounded">
-                        <h2 class="SellCar">Sell Your Car</h2>
-
-                        <form action="/cars/sell" method="post" enctype="multipart/form-data">
-                            <div class="mb-3 mt-3">
-                                <label for="carModel" class="form-label"><strong>Car Model</strong></label>
-                                <input type="text" class="form-control" id="carModel" name="carModel" required>
+                    <div class="col-10 col-md-8 offset-1 offset-md-2 mt-5 rounded custom-form pb-5 pt-5 shadow-lg">
+                        
+                        <h2 class="mb-4 text-center">Sell Your Car</h2>
+                        <form action="/cars/sell" method="post" class="border border-light rounded p-4" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <!-- <label for="carModel" class="form-label">Car Model</label> -->
+                                <input type="text" class="form-control custom-height" id="carModel" name="carModel"
+                                    placeholder="Enter Car model" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="carName" class="form-label"><strong>Car Name</strong></label>
-                                <input type="text" class="form-control" id="carName" name="carName" required>
+                                <!-- <label for="carName" class="form-label">Car Name</label> -->
+                                <input type="text" class="form-control custom-height" id="carName" name="carName"
+                                    placeholder="Enter Car Name" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="year" class="form-label"><strong>Manufacturing Year</strong></label>
-                                <input type="number" class="form-control" id="year" name="year" required>
+                                <!-- <label for="year" class="form-label">Manufacturing Year</label> -->
+                                <input type="number" class="form-control custom-height" id="year" name="year"
+                                    placeholder="Enter Manufacturing Date" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="price" class="form-label"><strong>Expected Price (&#8377;)</strong></label>
-                                <input type="number" class="form-control" id="price" name="price" required>
+                                <!-- <label for="price" class="form-label">Expected Price (&#8377;)</label> -->
+                                <input type="number" class="form-control custom-height" id="price" name="price"
+                                    placeholder="Enter Car Price" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="transmission" class="form-label"><strong>Transmission</strong></label>
-                                <select class="form-control" id="transmission" name="transmission" required>
-                                    <option value="">Choose</option>
-                                    <c:forEach var="item" items="${transmission}">
-                                        <option value="${item}">${item}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="fuelType" class="form-label"><strong>Fuel Type</strong></label>
-                                <select class="form-control" id="fuelType" name="fuelType" required>
+                                <!-- <label for="fuelType" class="form-label">Fuel Type</label> -->
+                                <select class="form-control custom-height" id="fuelType" name="fuelType" required>
                                     <option value="">Choose</option>
                                     <c:forEach var="item" items="${fuelType}">
                                         <option value="${item}">${item}</option>
@@ -73,28 +79,29 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="contactNumber" class="form-label"><strong>Contact Number</strong></label>
-                                <input type="text" class="form-control" id="contactNumber" name="contactNumber"
-                                    required>
+                                <!-- <label for="contactNumber" class="form-label">Contact Number</label> -->
+                                <input type="text" class="form-control custom-height" id="contactNumber"
+                                    name="contactNumber" placeholder="Enter Contact No." required>
                             </div>
 
 
                             <div class="mb-3">
-                                <label for="carImage" class="form-label"><strong>Upload Image</strong></label>
-                                <input type="file" class="form-control" id="carImage" name="carImage"
+                                <!-- <label for="carImage" class="form-label">Upload Image</label> -->
+                                <input type="file" class="form-control custom-height" id="carImage" name="carImage"
                                     accept="image/png, image/jpeg" required>
                             </div>
 
                             <!-- <div class="mb-3">
-                <label for="imageUrl" class="form-label">Car Image</label>
-                <div class="image-preview" onclick="document.getElementById('imageUrl').click();">
-                    <span>Click to upload image</span>
-                    <img id="previewImg">
-                </div>
-                <input type="file" class="form-control" id="imageUrl" name="imageUrl" accept="image/*" style="display: none;" onchange="previewImage(event)">
-            </div> -->
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                        <label for="imageUrl" class="form-label">Car Image</label>
+                        <div class="image-preview" onclick="document.getElementById('imageUrl').click();">
+                            <span>Click to upload image</span>
+                            <img id="previewImg">
+                        </div>
+                        <input type="file" class="form-control" id="imageUrl" name="imageUrl" accept="image/*" style="display: none;" onchange="previewImage(event)">
+                    </div> -->
+                            <div class="button">
+                                <button type="submit" class="btn submit-btn w-100 border border-light">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -115,6 +122,7 @@
                 //     }
                 // }
             </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         </body>
 
         </html>

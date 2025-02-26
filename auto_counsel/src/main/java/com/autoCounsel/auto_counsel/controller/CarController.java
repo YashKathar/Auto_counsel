@@ -106,32 +106,97 @@ public class CarController {
     }
 }
 
+//
+//@GetMapping("/buyCar")
+//public String getList( Model model) {
+//	model.addAttribute("carName", "Enter car name");
+//	model.addAttribute("carModel", "Enter car model");
+//	model.addAttribute("fuelType", "Choose..");
+//    return "buyCar";
+//}
+//
+//@GetMapping("/buyCar")
+//public String getListOfCars(@RequestParam(value = "carName") String carName, @RequestParam(value = "carModel") String carModel, @RequestParam(value = "fuelType", required = false) FuelType fuelType, @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "6" ,required = false) Integer pageSize, Model model) throws IOException {
+//	
+//	SearchCarDto searchCarDto = new SearchCarDto();
+//	searchCarDto.setCarName(carName);
+//	searchCarDto.setCarModel(carModel);
+//	searchCarDto.setFuelType(fuelType);
+//	FilterCarPagebleDto searchedCar2 = carService.getSearchedCar(searchCarDto, pageNumber, pageSize);
+//	List<SearchedCarResponseDto> listSearchedCarResponseDto = new ArrayList<>();
+//	for(Car c: searchedCar2.getCars()) {
+//		String carImage = c.getCarImage();
+//		byte[] allBytes = Files.readAllBytes(Paths.get(carImage));
+//		SearchedCarResponseDto searchedCarResponseDto = modelMapper.map(c, SearchedCarResponseDto.class);
+//		String carImageString = Base64.getEncoder().encodeToString(allBytes);
+//		searchedCarResponseDto.setCarImage(carImageString);
+//		listSearchedCarResponseDto.add(searchedCarResponseDto);
+//		
+//	}
+//	model.addAttribute("searchedCar", listSearchedCarResponseDto);
+//	model.addAttribute("totalPages", searchedCar2.getTotalPages());
+//	return "buyCar";
+//}
+    
+    @GetMapping("/buyCar")
+    public String getListOfCars(
+            @RequestParam(value = "carName", required = false) String carName,
+            @RequestParam(value = "carModel", required = false) String carModel,
+            @RequestParam(value = "fuelType", required = false) String fuelTypeParam,
+            @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "6") Integer pageSize,
+            Model model) throws IOException {
 
-@GetMapping("/buyCar")
-public String getList( Model model) {
-	model.addAttribute("carName", "Enter car name");
-	model.addAttribute("carModel", "Enter car model");
-	model.addAttribute("fuelType", "Choose..");
-    return "buyCar";
-}
+        // Convert fuelType String to Enum
+        FuelType fuelType = null;
+        if (fuelTypeParam != null && !fuelTypeParam.isEmpty()) {
+            try {
+                fuelType = FuelType.valueOf(fuelTypeParam.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                fuelType = null; // Handle invalid enum values gracefully
+            }
+        }
 
-@PostMapping("/buyCar")
-public String getListOfCars(SearchCarDto searchCarDto, Model model,  @RequestParam(value = "pagenumber", defaultValue = "0") Integer pageNumber, @RequestParam(value = "pagesize", defaultValue = "6", required = false) Integer pageSize) throws IOException {
-	FilterCarPagebleDto searchedCar2 = carService.getSearchedCar(searchCarDto, pageNumber, pageSize);
-	List<SearchedCarResponseDto> listSearchedCarResponseDto = new ArrayList<>();
-	for(Car c: searchedCar2.getCars()) {
-		String carImage = c.getCarImage();
-		byte[] allBytes = Files.readAllBytes(Paths.get(carImage));
-		SearchedCarResponseDto searchedCarResponseDto = modelMapper.map(c, SearchedCarResponseDto.class);
-		String carImageString = Base64.getEncoder().encodeToString(allBytes);
-		searchedCarResponseDto.setCarImage(carImageString);
-		listSearchedCarResponseDto.add(searchedCarResponseDto);
-		
-	}
-	model.addAttribute("searchedCar", listSearchedCarResponseDto);
-	model.addAttribute("totalPages", searchedCar2.getTotalPages());
-	return "buyCar";
-}
+        // Create DTO for search criteria
+        SearchCarDto searchCarDto = new SearchCarDto();
+        searchCarDto.setCarName(carName);
+        searchCarDto.setCarModel(carModel);
+        searchCarDto.setFuelType(fuelType);
 
-     
+        // Fetch paginated cars
+        FilterCarPagebleDto searchedCar2 = carService.getSearchedCar(searchCarDto, pageNumber, pageSize);
+
+        // Convert cars to DTOs with Base64 images
+        List<SearchedCarResponseDto> listSearchedCarResponseDto = new ArrayList<>();
+        for (Car c : searchedCar2.getCars()) {
+            String carImagePath = c.getCarImage();
+            SearchedCarResponseDto searchedCarResponseDto = modelMapper.map(c, SearchedCarResponseDto.class);
+
+            if (carImagePath != null && !carImagePath.isEmpty()) {
+                try {
+                    byte[] allBytes = Files.readAllBytes(Paths.get(carImagePath));
+                    String carImageString = Base64.getEncoder().encodeToString(allBytes);
+                    searchedCarResponseDto.setCarImage(carImageString);
+                } catch (IOException e) {
+                    System.err.println("Error reading image: " + carImagePath);
+                }
+            }
+
+            listSearchedCarResponseDto.add(searchedCarResponseDto);
+        }
+
+        // Add attributes to model
+        model.addAttribute("searchedCar", listSearchedCarResponseDto);
+        model.addAttribute("totalPages", searchedCar2.getTotalPages());
+        
+        System.out.println("totalPage : "+searchedCar2.getTotalPages());
+        System.out.println("currentPage : "+pageNumber);
+        
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("pageSize", pageSize);
+
+        return "buyCar"; // Return JSP view
+    }
+
+      
 }
