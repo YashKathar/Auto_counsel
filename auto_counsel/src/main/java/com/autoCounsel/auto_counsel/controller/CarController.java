@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.autoCounsel.auto_counsel.dto.FilterCarPagebleDto;
 import com.autoCounsel.auto_counsel.dto.SearchCarDto;
 import com.autoCounsel.auto_counsel.dto.SellCarDto;
 import com.autoCounsel.auto_counsel.dto.SearchedCarResponseDto;
@@ -25,6 +27,8 @@ import com.autoCounsel.auto_counsel.entity.Car;
 import com.autoCounsel.auto_counsel.entity.SellCar;
 import com.autoCounsel.auto_counsel.entity.User;
 import com.autoCounsel.auto_counsel.enums.FuelType;
+import com.autoCounsel.auto_counsel.enums.Transmission;
+import com.autoCounsel.auto_counsel.service.CarService;
 import com.autoCounsel.auto_counsel.service.SellCarService;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,6 +42,11 @@ public class CarController {
     
     @Autowired
     private ModelMapper modelMapper; 
+    
+    @Autowired
+    private CarService carService;
+
+	private FilterCarPagebleDto searchedCar;
 
 //    @PostMapping("/save")
 //     public String save(@ModelAttribute CarDto car, Model model) {
@@ -53,6 +62,7 @@ public class CarController {
     @GetMapping("/sellCar")
     public String getList(@ModelAttribute Car car, Model model) {
     	model.addAttribute("fuelType", FuelType.values());
+    	model.addAttribute("transmission", Transmission.values());
         return "sellCar";
     }
 
@@ -91,6 +101,7 @@ public class CarController {
         
        } catch (Exception e) {
         redirectAttributes.addFlashAttribute("errorMessage", "Failed to list the car for sale: " + e.getMessage());
+        System.out.println(e.getMessage());
         return "redirect:/cars/sellCar";
     }
 }
@@ -105,21 +116,22 @@ public String getList( Model model) {
 }
 
 @PostMapping("/buyCar")
-public String getListOfCars(SearchCarDto searchCarDto, Model model) throws IOException {
-	List<SellCar> listSellCar =sellCarService.getSearchedCar(searchCarDto);
+public String getListOfCars(SearchCarDto searchCarDto, Model model,  @RequestParam(value = "pagenumber", defaultValue = "0") Integer pageNumber, @RequestParam(value = "pagesize", defaultValue = "6", required = false) Integer pageSize) throws IOException {
+	FilterCarPagebleDto searchedCar2 = carService.getSearchedCar(searchCarDto, pageNumber, pageSize);
 	List<SearchedCarResponseDto> listSearchedCarResponseDto = new ArrayList<>();
-	for(SellCar c: listSellCar) {
+	for(Car c: searchedCar2.getCars()) {
 		String carImage = c.getCarImage();
 		byte[] allBytes = Files.readAllBytes(Paths.get(carImage));
 		SearchedCarResponseDto searchedCarResponseDto = modelMapper.map(c, SearchedCarResponseDto.class);
 		String carImageString = Base64.getEncoder().encodeToString(allBytes);
 		searchedCarResponseDto.setCarImage(carImageString);
 		listSearchedCarResponseDto.add(searchedCarResponseDto);
-	}	
-	model.addAttribute("searchedCar", listSearchedCarResponseDto); 
+		
+	}
+	model.addAttribute("searchedCar", listSearchedCarResponseDto);
+	model.addAttribute("totalPages", searchedCar2.getTotalPages());
 	return "buyCar";
 }
-
 
      
 }

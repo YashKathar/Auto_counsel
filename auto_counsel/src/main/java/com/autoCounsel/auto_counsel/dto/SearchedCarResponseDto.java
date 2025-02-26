@@ -13,7 +13,9 @@ import lombok.Data;
 @Data
 public class SearchedCarResponseDto {
 
-   
+    private Long carId;
+    
+    
     private String carModel;
 
    
@@ -33,4 +35,6 @@ public class SearchedCarResponseDto {
     
     @Lob
     private String carImage;
+    
+    private Boolean isBooked;
 }

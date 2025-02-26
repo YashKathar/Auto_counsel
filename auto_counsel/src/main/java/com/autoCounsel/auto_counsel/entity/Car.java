@@ -16,45 +16,55 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Unique identifier for the car
+    private Long carId; 
 
     @Column(nullable = false, length = 50)
-    private String make; // Car's manufacturer (e.g., Toyota, Ford)
-
+    private String carName;
+    
     @Column(nullable = false, length = 50)
-    private String model; // Car model (e.g., Corolla, Mustang)
+    private String carModel;
 
     @Column(nullable = false)
-    private Integer year; // Manufacturing year
+    private Integer year;
 
-    @Column( name = "price", nullable = false )
+    @Column(name = "price", nullable = false)
     private Double price;
 
-
-    @Column(columnDefinition = "TEXT")
-    private String description; // Description of the car
-
-    private Integer mileage; // Mileage in kilometers/miles
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private FuelType fuelType; // Type of fuel (Petrol, Diesel, Electric, Hybrid)
+    private FuelType fuelType;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) 
     @Column(nullable = false)
-    private Transmission transmission; // Transmission type (Manual, Automatic)
+    private Transmission transmission;
 
     @ManyToOne
     @JoinColumn(name = "seller_id", nullable = false)
-    private User seller; // Foreign key referencing the seller
+    private User seller;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt; // Timestamp when the car is listed
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt; // Last update timestamp
+    private LocalDateTime updatedAt;
 
-    @Column(name = "image_url", length = 255)
-    private String imageUrl; // URL for car image
+    @Column(name = "car_image")
+    private String carImage;
 
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean isBooked = false;
+
+//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "fk_order_id", referencedColumnName = "orderId", unique = true)
+//    private Orders orders;
+    
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Orders orders;
+
+    @Column(name = "contact_number", nullable = false, length = 15)
+    private String contactNumber;
+
+    private Integer buyerId;
+    
 }
+

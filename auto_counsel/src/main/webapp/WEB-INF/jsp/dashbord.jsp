@@ -171,7 +171,7 @@
 			<div class="form_blur"></div>
 			<div class="form">
 				<h2>Find and Buy Cars, Auto Parts and services</h2>
-				<form action="/cars/buyCar" method="POST" modelAttribute="searchCarDto" class="p-4 border rounded shadow">
+				<form action="/cars/buyCar?pagenumber=1" method="POST" modelAttribute="searchCarDto" class="p-4 border rounded shadow">
 				<div class=" ">
 					<div class="mb-3">
     
@@ -184,10 +184,10 @@
 						<input type="text" id="carModel" name="carModel" path="carModel" class="form-control" placeholder="Enter car model" >
 					</div>
 
-					<div class="mb-3">
+					<%-- <div class="mb-3">
 						<!-- <label for="carBrand" class="form-label">Car Model</label> -->
 						<input type="text" id="carBrand" name="carBrand" path="carBrand" class="form-control" placeholder="Enter car brand" >
-					</div>
+					</div> --%>
 					
 					<div class="mb-3">
 						<!-- <label for="fuelType" class="form-label">Fuel Type</label> -->

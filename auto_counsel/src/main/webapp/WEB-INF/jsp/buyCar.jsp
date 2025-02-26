@@ -14,6 +14,7 @@
       body {
         background-color: lavender;
       }
+
       .card-img-man {
         height: 300px;
         object-fit: contain;
@@ -22,7 +23,13 @@
       .card-text {
         margin: 2px 0px 2px 0px !important;
       }
+
+      .buynow-btn {
+        display: flex;
+        justify-content: center;
+      }
     </style>
+
     <body>
       ${carName}
       <%-- <section id="buy-car-form" class="container mt-3">
@@ -88,6 +95,7 @@
             </table>
           </div>
           </section> --%>
+
           <div class="container mt-5 mb-5">
             <div class="row row-cols-1 row-cols-md-2 g-5">
               <c:forEach items="${searchedCar}" var="car">
@@ -98,9 +106,23 @@
                       <h5 class="card-title">${car.carName}</h5>
                       <p class="card-text"><strong>Model :</strong> ${car.carModel}</p>
                       <p class="card-text"><strong>Fuel Type :</strong> ${car.fuelType}</p>
-                      <p class="card-text"><strong>Manufacturing Year :</strong> ${car.year}</p>
                       <p class="card-text"><strong>Price :</strong> ${car.price}</p>
+                      <p class="card-text"><strong>Manufacturing Year :</strong> ${car.year}</p>
                       <p class="card-text"><strong>Owner Contact :</strong> ${car.contactNumber}</p>
+
+                      <div class="buynow-btn">
+                        <c:choose>
+                          <c:when test="${!car.isBooked}">
+                            <form action="/order/create-order/${car.carId}" method="post">
+                              <button class="btn btn-primary mt-3 mb-3">Buy Now</button>
+                            </form>
+                          </c:when>
+                          <c:otherwise>
+                            <button class="btn btn-danger mt-3 mb-3" disabled>Booked</button>
+                          </c:otherwise>
+                        </c:choose>
+                      </div>
+
                     </div>
                   </div>
                 </div>

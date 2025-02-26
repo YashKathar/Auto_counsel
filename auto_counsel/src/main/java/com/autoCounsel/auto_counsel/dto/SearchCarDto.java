@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class SearchCarDto {
 	private String carName;
-	private String carModel; 
-	private String carBrand; 
+	private String carModel;  
 	private FuelType fuelType;
 }

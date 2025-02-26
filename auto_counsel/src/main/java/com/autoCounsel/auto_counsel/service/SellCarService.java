@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.autoCounsel.auto_counsel.dao.CarRepo;
 import com.autoCounsel.auto_counsel.dao.sellCarRepo;
 import com.autoCounsel.auto_counsel.dto.SearchCarDto;
 import com.autoCounsel.auto_counsel.dto.SellCarDto;
+import com.autoCounsel.auto_counsel.entity.Car;
 import com.autoCounsel.auto_counsel.entity.SellCar;
 
 @Service
@@ -29,6 +31,9 @@ public class SellCarService {
     
     @Autowired
     private ModelMapper modelMapper;
+    
+    @Autowired
+    private CarRepo carRepo;
     
     @Value("${car.image.path}")
 	private String productImagePath;
@@ -69,6 +74,9 @@ public class SellCarService {
     	//store the path in database
     	sellCar.setCarImage(path.toString());
     	
+    	Car car = modelMapper.map(sellCar, Car.class);
+    	car.setSeller(sellCar.getUser());
+    	carRepo.save(car);
         return sellCarRepo.save(sellCar);
         
     }

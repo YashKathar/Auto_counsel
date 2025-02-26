@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.autoCounsel.auto_counsel.enums.FuelType;
+import com.autoCounsel.auto_counsel.enums.Transmission;
 
 
 @Entity
@@ -44,6 +45,9 @@ public class SellCar {
     
     @Enumerated(EnumType.STRING)
     private FuelType fuelType;
+    
+    @Enumerated(EnumType.STRING)
+    private Transmission transmission;
 
 //    @Column(name = "image_url", length = 255)
 //    private String imageUrl; // Store image path
