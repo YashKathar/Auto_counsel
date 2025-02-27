@@ -66,6 +66,7 @@
                     </table>
                 </c:if>
             </div>
+            <%@ include file="common/footer.jspf" %>
             <script>
                 // JavaScript to count the number of table rows dynamically
                 document.getElementById("serviceCount").innerText =

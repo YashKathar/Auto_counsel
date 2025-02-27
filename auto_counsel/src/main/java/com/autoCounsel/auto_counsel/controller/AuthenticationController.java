@@ -56,7 +56,7 @@ public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user, Htt
     session.setAttribute("user", loginUser);
 
     Map<String, String> response = new HashMap<>();
-    response.put("redirect", loginUser.getRole().equalsIgnoreCase("owner") ? "/auth/dashboard" : "/auth/dashboard");
+    response.put("redirect", loginUser.getRole().toString().equals("ROLE_ADMIN") ? "/auth/dashboard" : "/auth/dashboard");
     return ResponseEntity.ok(response);
 }
 

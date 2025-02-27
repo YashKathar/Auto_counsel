@@ -1,6 +1,8 @@
 package com.autoCounsel.auto_counsel.entity;
 
 
+import com.autoCounsel.auto_counsel.enums.Role;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import jakarta.persistence.Column;
@@ -39,7 +41,7 @@ public class User {
     private String password; // User's password
 
     
-    @Column(name = "role", length = 45)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     
 }

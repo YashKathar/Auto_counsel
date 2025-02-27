@@ -109,6 +109,8 @@
                 </div>
 
             </div>
+            
+            <%@ include file="common/footer.jspf" %>
 
             <script>
                 // Set min date for appointment
@@ -127,6 +129,7 @@
                         event.preventDefault();
                     }
                 });
+                
             </script>
             <!-- Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>

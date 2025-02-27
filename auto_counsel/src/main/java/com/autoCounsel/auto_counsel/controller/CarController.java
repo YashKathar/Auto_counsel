@@ -151,7 +151,7 @@ public class CarController {
         FuelType fuelType = null;
         if (fuelTypeParam != null && !fuelTypeParam.isEmpty()) {
             try {
-                fuelType = FuelType.valueOf(fuelTypeParam.toUpperCase());
+                fuelType = FuelType.valueOf(fuelTypeParam);
             } catch (IllegalArgumentException e) {
                 fuelType = null; // Handle invalid enum values gracefully
             }

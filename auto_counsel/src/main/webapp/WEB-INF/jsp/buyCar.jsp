@@ -161,11 +161,32 @@
                       </c:if>
   
                       
-                        <c:forEach var="i" begin="0" end="${totalPages - 1}">
-                          <li class="page-item ${currentPage == i ? 'active' : ''}">
-                            <a class="page-link" href="buyCar?pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
-                          </li>
-                        </c:forEach>
+                          <%-- <c:forEach var="i" begin="0" end="${totalPages - 1}">
+                            <li class="page-item ${currentPage == i ? 'active' : ''}">
+                              <a class="page-link" href="buyCar?pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
+                            </li>
+                          </c:forEach> --%>
+
+                          <c:forEach var="i" begin="0" end="${totalPages - 1}">
+                            <c:if test="${i == currentPage}">
+                              <li class="page-item ${i+1 <= totalPages-1 ? 'd-none' : ''}">
+                                <a class="page-link" href="buyCar?pageNumber=${i-2}&pageSize=${pageSize}">${i - 1}</a>
+                              </li> 
+                              <li class="page-item ${i-1 < 0 ? 'd-none' : ''}">
+                                <a class="page-link" href="buyCar?pageNumber=${i-1}&pageSize=${pageSize}">${i}</a>
+                              </li>
+                              <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                <a class="page-link" href="buyCar?pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
+                              </li>
+                              <li class="page-item ${i+1 > totalPages-1 ? 'd-none' : ''}">
+                                <a class="page-link" href="buyCar?pageNumber=${i+1}&pageSize=${pageSize}">${i + 2}</a>
+                              </li>
+                              <li class="page-item ${i-1 >= 0 ? 'd-none' : ''}">
+                                <a class="page-link" href="buyCar?pageNumber=${i+2}&pageSize=${pageSize}">${i + 3}</a>
+                              </li>
+                            </c:if>
+                          </c:forEach>
+
   
                         <c:if test="${currentPage < totalPages - 1}">
                           <li class="page-item">
@@ -189,7 +210,7 @@
             </div>
 
 
-
+            <%@ include file="common/footer.jspf" %>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
               integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
               crossorigin="anonymous"></script>
