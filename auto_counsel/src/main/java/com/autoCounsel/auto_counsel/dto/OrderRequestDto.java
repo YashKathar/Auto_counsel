@@ -10,5 +10,5 @@ public class OrderRequestDto {
 	private String lastName;
 	private String contactNumber;
 	private PaymentOptions paymentOptions;
-	private Long car;
+	private Long carId;
 }

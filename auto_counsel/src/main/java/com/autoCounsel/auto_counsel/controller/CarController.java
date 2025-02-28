@@ -22,16 +22,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.autoCounsel.auto_counsel.dto.FilterCarPagebleDto;
 import com.autoCounsel.auto_counsel.dto.SearchCarDto;
 import com.autoCounsel.auto_counsel.dto.SellCarDto;
+import com.autoCounsel.auto_counsel.dto.SortResponseDto;
 import com.autoCounsel.auto_counsel.dto.SearchedCarResponseDto;
 import com.autoCounsel.auto_counsel.entity.Car;
 import com.autoCounsel.auto_counsel.entity.SellCar;
 import com.autoCounsel.auto_counsel.entity.User;
 import com.autoCounsel.auto_counsel.enums.FuelType;
+import com.autoCounsel.auto_counsel.enums.SortCars;
 import com.autoCounsel.auto_counsel.enums.Transmission;
 import com.autoCounsel.auto_counsel.service.CarService;
 import com.autoCounsel.auto_counsel.service.SellCarService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.val;
 
 @Controller
 @RequestMapping("/cars")
@@ -183,20 +186,32 @@ public class CarController {
             }
 
             listSearchedCarResponseDto.add(searchedCarResponseDto);
-        }
+        } 
 
         // Add attributes to model
         model.addAttribute("searchedCar", listSearchedCarResponseDto);
         model.addAttribute("totalPages", searchedCar2.getTotalPages());
-        
-        System.out.println("totalPage : "+searchedCar2.getTotalPages());
-        System.out.println("currentPage : "+pageNumber);
-        
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("pageSize", pageSize);
-
+        model.addAttribute("sortCars", SortCars.values());
         return "buyCar"; // Return JSP view
     }
-
+    
+    @GetMapping("/list")
+    private String getSortByAvailbility(@RequestParam(value = "sort") String sortString, @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber, Model model) {
+    	try {
+    		SortResponseDto sortResponseDto = carService.sortCarsByAvailability(sortString, pageNumber);
+    		model.addAttribute("totalPages", sortResponseDto.getTotalPages());
+    		model.addAttribute("searchedCar",sortResponseDto.getSearchedCarResponseDtos());
+    		model.addAttribute("sortCars", SortCars.values());
+    		sortResponseDto.getSearchedCarResponseDtos().forEach(System.out::println);
+    		return "buyCar";
+    		
+    	
+    	} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "buyCar";
+		}
+    }
       
 }

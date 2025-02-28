@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.autoCounsel.auto_counsel.dto.OrderRequestDto;
 import com.autoCounsel.auto_counsel.dto.OrderResponseDto;
@@ -29,10 +30,10 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@PostMapping("create-order/{ID}") 
-	public String addOrderPage(Model model, @PathVariable ("ID") Long carId) {
+	@GetMapping("create-order") 
+	public String addOrderPage(@RequestParam(value = "carId") Long carId, Model model) {
 		OrderRequestDto orderRequestDto = new OrderRequestDto();
-		orderRequestDto.setCar(carId);
+		orderRequestDto.setCarId(carId);
 		model.addAttribute("order", orderRequestDto);
 		model.addAttribute("paymentOptions", PaymentOptions.values());
 		return "Create_order"; 

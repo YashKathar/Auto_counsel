@@ -28,4 +28,7 @@ public interface CarRepo extends JpaRepository<Car, Long> {
 	           "ORDER BY c.carName ASC, c.carModel ASC NULLS LAST")
 	    Page<Car> filterCarsExceptFueltype(@Param("carName") String carName,
 	                         @Param("carModel") String carModel, Pageable pageable);
+	
+	Page<Car> findByIsBooked(Boolean check, Pageable pageble);
+	
 }

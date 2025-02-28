@@ -43,8 +43,8 @@
                                 </select>
                             </div>
 
-                            <input type="text" class="form-control" id="car" name="car" path="car"
-                                value="${order.car}" required hidden>
+                            <input type="text" class="form-control" id="carId" name="carId" path="carId"
+                                value="${order.carId}" required hidden>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
