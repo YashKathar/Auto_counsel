@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.autoCounsel.auto_counsel.dto.OrderRequestDto;
 import com.autoCounsel.auto_counsel.dto.OrderResponseDto;
@@ -24,6 +25,7 @@ import com.autoCounsel.auto_counsel.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@SessionAttributes("isAdmin")
 @RequestMapping(value = "/order/")
 @CrossOrigin(origins = "*")
 public class OrderController {

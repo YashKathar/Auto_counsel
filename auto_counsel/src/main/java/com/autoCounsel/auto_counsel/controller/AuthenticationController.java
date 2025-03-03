@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@SessionAttributes("isAdmin")
 @RequestMapping(value = "/auth")
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
@@ -62,7 +63,13 @@ public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user, Htt
 
 
     @GetMapping(value = "/dashboard")
-    public String dashBorPage(Model model){
+    public String dashBorPage(Model model,	HttpSession session){
+    	User loggedInUser = (User) session.getAttribute("user");
+    	if(loggedInUser != null && loggedInUser.getRole().toString().equals("ROLE_ADMIN"))
+    		model.addAttribute("isAdmin", true);	
+    	else 
+    		model.addAttribute("isAdmin", false);
+    	
     	model.addAttribute("fuelType", FuelType.values());
         return "dashbord";
     }

@@ -77,15 +77,20 @@
             </div> -->
 
           <div class="row mt-3">
-            <div class="col-4 col-md-2 offset-7 offset-md-9">
-              <select name="sortCars" id="sortCars" class="form-control">
-                <option value="">Sort</option>
-                <c:forEach var="item" items="${sortCars}">
-                  <option value="${item}" actions="">${item}</option>
-                </c:forEach>
-              </select>
+            <div class="col-4 col-md-2 offset-7 offset-md-10">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Sort
+                </button>
+                <ul class="dropdown-menu">
+                  <c:forEach var="item" items="${sortCars}">
+                    <li><a class="dropdown-item" href="<%= request.getContextPath() %>/cars/list?sort=${item}&pageNumber=${currentPage}&pageSize=${pageSize}">${item}</a></li>
+                  </c:forEach>
+                </ul>
+              </div>
             </div>
           </div>
+          
 
 
           <div class="container mt-5 mb-5">
@@ -156,22 +161,23 @@
                         <c:forEach var="i" begin="0" end="${totalPages - 1}">
                           <c:if test="${i == currentPage}">
                             <li class="page-item ${i+1 <= totalPages-1 ? 'd-none' : ''}">
-                              <a class="page-link" href="buyCar?pageNumber=${i-2}&pageSize=${pageSize}">${i - 1}</a>
+                              <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i-2}&pageSize=${pageSize}">${i - 1}</a>
                             </li>
                             <li class="page-item ${i-1 < 0 ? 'd-none' : ''}">
-                              <a class="page-link" href="buyCar?pageNumber=${i-1}&pageSize=${pageSize}">${i}</a>
+                              <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i-1}&pageSize=${pageSize}">${i}</a>
                             </li>
                             <li class="page-item ${currentPage == i ? 'active' : ''}">
-                              <a class="page-link" href="buyCar?pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
+                              <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
                             </li>
                             <li class="page-item ${i+1 > totalPages-1 ? 'd-none' : ''}">
-                              <a class="page-link" href="buyCar?pageNumber=${i+1}&pageSize=${pageSize}">${i + 2}</a>
+                              <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i+1}&pageSize=${pageSize}">${i + 2}</a>
                             </li>
                             <li class="page-item ${i-1 >= 0 ? 'd-none' : ''}">
-                              <a class="page-link" href="buyCar?pageNumber=${i+2}&pageSize=${pageSize}">${i + 3}</a>
+                              <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i+2}&pageSize=${pageSize}">${i + 3}</a>
                             </li>
                           </c:if>
                         </c:forEach>
+                        
 
                       
 
@@ -205,12 +211,14 @@
               integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
               crossorigin="anonymous"></script>
         </body>
+
         <script>
           document.getElementById("sortCars").addEventListener("change", function() {
               let selectedValue = this.value;
               if (selectedValue) {
                 let currentPage = new URLSearchParams(window.location.search).get("pageNumber") || 0;
-                  window.location.href = "<%= request.getContextPath() %>/cars/list?sort=" + encodeURIComponent(selectedValue) + "&pageNumber=" + currentPage;
+                let pageSize = new URLSearchParams(window.location.search).get("pageSize") || 0;
+                  window.location.href = "<%= request.getContextPath() %>/cars/list?sort=" + encodeURIComponent(selectedValue) + "&pageNumber=" + currentPage + "&pageSize=" + pageSize;
               }
           });
       </script>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.autoCounsel.auto_counsel.dto.FilterCarPagebleDto;
@@ -37,6 +38,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.val;
 
 @Controller
+@SessionAttributes("isAdmin")
 @RequestMapping("/cars")
 public class CarController {
 
@@ -198,12 +200,13 @@ public class CarController {
     }
     
     @GetMapping("/list")
-    private String getSortByAvailbility(@RequestParam(value = "sort") String sortString, @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber, Model model) {
+    private String getSortByAvailbility(@RequestParam(value = "sort") String sortString, @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "6") Integer pageSize, Model model) {
     	try {
-    		SortResponseDto sortResponseDto = carService.sortCarsByAvailability(sortString, pageNumber);
+    		SortResponseDto sortResponseDto = carService.sortCarsByAvailability(sortString, pageNumber, pageSize);
     		model.addAttribute("totalPages", sortResponseDto.getTotalPages());
     		model.addAttribute("searchedCar",sortResponseDto.getSearchedCarResponseDtos());
     		model.addAttribute("sortCars", SortCars.values());
+    		model.addAttribute("currentPage", pageNumber);
     		sortResponseDto.getSearchedCarResponseDtos().forEach(System.out::println);
     		return "buyCar";
     		

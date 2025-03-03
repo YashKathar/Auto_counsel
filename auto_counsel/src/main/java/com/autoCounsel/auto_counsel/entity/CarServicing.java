@@ -7,11 +7,9 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "car_servicing")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class CarServicing {
 
     @Id
@@ -41,12 +39,7 @@ public class CarServicing {
 	 @JoinColumn(name = "garage")
 	 private Garage garage;
 
-	@Override
-	public String toString() {
-		return "CarServicing [id=" + id + ", user=" + user + ", carModel=" + carModel + ", carName=" + carName
-				+ ", serviceType=" + serviceType + ", appointmentDate=" + appointmentDate + ", status=" + status
-				+ ", garage=" + garage + "]";
-	}
+	
     
    
 }

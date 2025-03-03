@@ -46,11 +46,11 @@ public class CarService {
 	    	}
 	    }
 
-	public SortResponseDto sortCarsByAvailability(String sortString, Integer pageNumber) {
+	public SortResponseDto sortCarsByAvailability(String sortString, Integer pageNumber, Integer pageSize) {
 		Boolean check;
 		if(sortString.equals("UNBOOKED")) {
 			check = false;
-			Pageable pageble = PageRequest.of(pageNumber, 6);
+			Pageable pageble = PageRequest.of(pageNumber, pageSize);
 			Page<Car> sortPage = carRepo.findByIsBooked(check, pageble);
 			FilterCarPagebleDto filterCarPagebleDto = new FilterCarPagebleDto(sortPage.getContent(), sortPage.getTotalPages());
 			return new SortResponseDto( getListOfSortDtos(filterCarPagebleDto), sortPage.getTotalPages());
