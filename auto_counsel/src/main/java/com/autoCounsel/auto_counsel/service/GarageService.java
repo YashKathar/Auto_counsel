@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.lang.model.element.Element;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class GarageService {
 	
 	@Autowired
 	private GarageRepo garageRepo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	public void addGarage(Garage garage) {
 		garageRepo.save(garage);
