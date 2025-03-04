@@ -21,6 +21,7 @@ public class Services {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long serviceId;
 	
+ 
 	private String serviceName;
 	
 	@ManyToMany
@@ -30,4 +31,5 @@ public class Services {
 			inverseJoinColumns = @JoinColumn(name="garage_id")
 	)
 	private List<Garage> garages;
+
 }
