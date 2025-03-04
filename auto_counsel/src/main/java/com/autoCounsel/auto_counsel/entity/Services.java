@@ -16,9 +16,5 @@ public class Services {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long serviceId;
 	
-	private String serviceName;
-	private String discriptionString() {
-		System.out.println("hello jfishfn");
-	}
-	
+	private String serviceName;  
 }
