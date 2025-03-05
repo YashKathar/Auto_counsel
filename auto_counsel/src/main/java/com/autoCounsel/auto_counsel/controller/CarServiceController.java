@@ -1,5 +1,6 @@
 package com.autoCounsel.auto_counsel.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.autoCounsel.auto_counsel.entity.CarServicing;
 import com.autoCounsel.auto_counsel.entity.Garage;
+import com.autoCounsel.auto_counsel.entity.Services;
 import com.autoCounsel.auto_counsel.entity.User;
 import com.autoCounsel.auto_counsel.service.CarServicingService;
 import com.autoCounsel.auto_counsel.service.GarageService;
@@ -32,9 +35,19 @@ public class CarServiceController {
     private GarageService garageService;
 
     @GetMapping("/book-service")
-    public String showBookingForm(Model model) {
-    	List<Garage> garages = garageService.getGarages();
+    public String showBookingForm(@RequestParam(value = "garage", required = false) Integer garage, Model model) {
+    	List<Garage> garages = garageService.getGarages(); 
     	model.addAttribute("garages", garages);
+    	if(garage == null || garage == 0) {
+    		return "select-garage";
+    	}
+    	List<Services> serviceList = new ArrayList<>();
+    	for(Garage g : garages) {
+    		if(g.getId() == garage) {
+    			serviceList = g.getServices();
+    		}
+    	}
+    	model.addAttribute("services", serviceList);
         return "book-service"; 
     }
 
@@ -50,15 +63,6 @@ public class CarServiceController {
             // Book the service and save it
             carServicingService.bookCarService(carServicing);
 
-            // Add flash attributes to display in the success message
-            redirectAttributes.addFlashAttribute("message", "Your car servicing booking is confirmed!");
-            redirectAttributes.addFlashAttribute("carModel", carServicing.getCarModel());
-            redirectAttributes.addFlashAttribute("carName", carServicing.getCarName());
-            redirectAttributes.addFlashAttribute("serviceType", carServicing.getServiceType());
-            redirectAttributes.addFlashAttribute("appointmentDate", carServicing.getAppointmentDate());
-            redirectAttributes.addFlashAttribute("garage", carServicing.getGarage().getGarageName());
-
-            // Redirect to the confirmation page
             return "redirect:/carsService/booking-confirmation";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to book car service: " + e.getMessage());

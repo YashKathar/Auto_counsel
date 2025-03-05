@@ -28,7 +28,7 @@ public class Services {
  
 	private String serviceName;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 			name = "service_garage",
 			joinColumns = @JoinColumn(name="service_id"), 

@@ -41,10 +41,20 @@ public class GarageService {
 			return servicesRepo.findByServiceName(service).orElseThrow(() ->  new EntityNotFoundException("service with name :"+service+" is not found"));
 		}).collect(Collectors.toList());
 		
-		garage.setServices(listOfServices);
+		Garage saved = garageRepo.save(garage);
 		
-		return garageRepo.save(garage);
-	}
+		for(Services service : listOfServices) {
+			List<Garage> garages = new ArrayList<>();
+			if(!service.getGarages().isEmpty()) {
+				garages = service.getGarages();
+			}
+			garages.add(garage);
+			service.setGarages(garages);
+			servicesRepo.save(service);
+		}
+		
+		return saved;
+	} 
 	
 	
 	public List<Garage> getGarages() {

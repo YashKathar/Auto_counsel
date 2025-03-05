@@ -64,20 +64,27 @@
                     <div class="row">
                         <h1 class="text-center mt-3">Add Garage</h1>
                         <div class="col-10 col-md-8 offset-1 offset-md-2 mt-2 rounded custom-form pb-5 pt-5 shadow-lg">
-                            <form class="custom-form border border-light rounded p-4" method="post" modelAttribute="garage">
+                            <form class="custom-form border border-light rounded p-4" method="post"
+                                modelAttribute="garage">
                                 <input type="hidden" path="id" />
                                 <div class="mb-3">
-                                    <input type="text" class="form-control input-height" name="garageName" id="garageName" path="garageName" placeholder="Enter Name" required="required" />
+                                    <input type="text" class="form-control input-height" name="garageName"
+                                        id="garageName" path="garageName" placeholder="Enter Name"
+                                        required="required" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control input-height" name="garageAddress" id="garageAddress" path="garageAddress" placeholder="Enter Address" required="required">
+                                    <input type="text" class="form-control input-height" name="garageAddress"
+                                        id="garageAddress" path="garageAddress" placeholder="Enter Address"
+                                        required="required">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control input-height" name="garagePhone" id="garagePhone" path="garagePhone" placeholder="Enter Phone" required="required" />
+                                    <input type="text" class="form-control input-height" name="garagePhone"
+                                        id="garagePhone" path="garagePhone" placeholder="Enter Phone"
+                                        required="required" />
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="hidden" path="services" id="services" name="services">
+                                    <input type="hidden" path="services" id="services" name="services" />
                                     <div class="selected-options" id="selectedOptions"></div>
 
                                     <div class="dropdown">
@@ -105,15 +112,21 @@
                 </div>
 
                 <script>
-
                     const selectedOptions = [];
+
+                    let submitBtn = document.querySelector(".submit-btn");
+                    if (selectedOptions.length == 0) {
+                        submitBtn.disabled = true;
+                    } else {
+                        submitBtn.disabled = false;
+                    }
 
                     function selectOption(option) {
                         if (!selectedOptions.includes(option)) {
                             selectedOptions.push(option);
                             updateSelectedOptions();
                         }
-                       
+
                     }
 
                     function updateSelectedOptions() {
@@ -130,17 +143,28 @@
                             values.value += option + ", ";
                             selectedOptionsContainer.appendChild(tag);
                         });
-
+                        let submitBtn = document.querySelector(".submit-btn");
+                        if (selectedOptions.length == 0) {
+                            submitBtn.disabled = true;
+                        } else {
+                            submitBtn.disabled = false;
+                        }
                         console.log(selectedOptions);
                     }
 
-                  
+
 
                     function removeOption(option) {
                         const index = selectedOptions.indexOf(option);
                         if (index !== -1) {
                             selectedOptions.splice(index, 1);
                             updateSelectedOptions();
+                        }
+                        let submitBtn = document.querySelector(".submit-btn");
+                        if (selectedOptions.length == 0) {
+                            submitBtn.disabled = true;
+                        } else {
+                            submitBtn.disabled = false;
                         }
                     }
 

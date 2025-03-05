@@ -20,11 +20,11 @@ public class CarServicingDto {
 
     private String carName;
 
-    private String serviceType;
+    private String services;
 
     private LocalDate appointmentDate;
 
-    private String status;
+    private String garage;
 
 
 }

@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.autoCounsel.auto_counsel.dao.GarageRepo;
+import com.autoCounsel.auto_counsel.dao.ServicesRepo;
 import com.autoCounsel.auto_counsel.dto.GarageDto;
+import com.autoCounsel.auto_counsel.entity.Garage;
+import com.autoCounsel.auto_counsel.entity.Services;
 import com.autoCounsel.auto_counsel.service.GarageService;
 
 @Controller
@@ -49,5 +53,31 @@ public class GarageController {
 		garageService.addGarage(garage, serviceList);
 		return "redirect:/garage/add";
 	}
+	
+//	
+	
+	@Autowired
+	ServicesRepo servicesRepo;
+	
+	@Autowired
+	GarageRepo garageRepo;
+	
+	@GetMapping("/testing")
+	public String helper() {
+		Services service = new Services();
+		service.setServiceName("Hello");
+		List<Garage> list = new ArrayList<>();
+		Garage garage = new Garage();
+		garage.setGarageName("Mukesh");
+		garage.setGarageAddress("Pune");
+		garage.setGaragePhone("92929292");
+		Garage saved = garageRepo.save(garage);
+		list.add(saved);
+		service.setGarages(list);
+		servicesRepo.save(service);
+		return "/";
+	}
+	
+//	
 	
 }

@@ -92,40 +92,32 @@
                                 </div>
 
                                 <!-- Garage -->
-                                <div class="mb-3">
+                                <%-- <div class="mb-3">
                                     <!-- <label for="garage" class="form-label">Garage</label> -->
                                     <select name="garage" class="form-control input-height" id="garage" required
                                         aria-label="garage">
+                                        <option value="">Select Garage</option>
                                         <c:forEach items="${garages}" var="garage">
                                             <option value="${garage.id}">${garage.garageName}</option>
                                         </c:forEach>
                                     </select>
-                                </div>
+                                </div> --%>
 
                                 <!-- Service Type -->
                                 <div class="mb-3">
                                     <div class="selected-options" id="selectedOptions"></div>
 
                                     <div class="dropdown">
-                                        <button class="btn btn-light dropdown-toggle w-100" type="button"
+                                        <button class="btn btn-light dropdown-toggle w-100 input-height" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             Select Service
                                         </button>
-                                        <ul class="dropdown-menu" id="dropdownMenu">
-                                            <li><a class="dropdown-item" href="#"
-                                                    onclick="selectOption('JavaScript')">JavaScript</a></li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    onclick="selectOption('Python')">Python</a></li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    onclick="selectOption('Java')">Java</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="selectOption('C++')">C++</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    onclick="selectOption('React')">React</a></li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    onclick="selectOption('Node.js')">Node.js</a></li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    onclick="selectOption('Spring Boot')">Spring Boot</a></li>
+                                        <ul class="dropdown-menu service-selector" id="dropdownMenu">
+                                            <c:forEach var="item" items="${services}">
+                                                <li><a class="dropdown-item" href="#"
+                                                        onclick="selectOption('${item.serviceName}')">${item.serviceName}</a>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
                                     </div>
                                 </div>
@@ -137,17 +129,6 @@
                                     <input type="date" name="appointmentDate" class="form-control input-height"
                                         id="appointmentDate" required aria-label="Appointment Date">
                                 </div>
-
-                                <!-- Status -->
-                                <!-- <div class="mb-3">
-                                <label for="status" class="form-label">Status</label>
-                                <select name="status" class="form-control" id="status" required aria-label="Service Status">
-                                    <option value="">Select Status</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Confirmed">Confirmed</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
-                            </div> -->
 
                                 <!-- Submit Button -->
                                 <button type="submit" class="btn submit-btn w-100 border border-light">Book
@@ -161,6 +142,7 @@
                 <%@ include file="common/footer.jspf" %>
 
                     <script>
+
                         // Set min date for appointment
                         document.getElementById('appointmentDate').min = new Date().toISOString().split('T')[0];
 
@@ -183,7 +165,6 @@
                         function selectOption(option) {
                             if (!selectedOptions.includes(option)) {
                                 selectedOptions.push(option);
-                                console.log(selectedOptions);
                                 updateSelectedOptions();
                             }
                         }
@@ -199,8 +180,6 @@
                                 console.log(option);
                                 selectedOptionsContainer.appendChild(tag);
                             });
-                            console.log(selectedOptions);
-                            console.log(selectedOptionsContainer);
                         }
 
                         function removeOption(option) {
