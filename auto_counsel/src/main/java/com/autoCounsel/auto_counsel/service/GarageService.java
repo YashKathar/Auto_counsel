@@ -38,12 +38,7 @@ public class GarageService {
 		garage.setGaragePhone(garageDto.getGaragePhone());
 		
 		List<Services> listOfServices = servicesNames.stream().map(service -> {
-			Services services = servicesRepo.findByServiceName(service).orElseThrow(() ->  new EntityNotFoundException("service with name :"+service+" is not found"));
-			List<Garage> garages = new ArrayList<>();
-			garages.add(garage);
-			services.setGarages(garages);
-			return servicesRepo.save(services);
-			
+			return servicesRepo.findByServiceName(service).orElseThrow(() ->  new EntityNotFoundException("service with name :"+service+" is not found"));
 		}).collect(Collectors.toList());
 		
 		garage.setServices(listOfServices);

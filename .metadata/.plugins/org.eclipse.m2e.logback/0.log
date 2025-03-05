@@ -2185,3 +2185,25 @@
 2025-03-04 18:19:27,778 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2025-03-04 18:19:27,795 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 76 resources from src\main\resources to target\classes
 2025-03-04 18:19:27,848 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\HP\Desktop\cars\Auto_counsel\auto_counsel\src\test\resources
+2025-03-05 12:20:49,181 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-03-05 12:32:00,891 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-03-05 12:32:01,000 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 76 resources from src\main\resources to target\classes
+2025-03-05 12:32:01,145 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\HP\Desktop\cars\Auto_counsel\auto_counsel\src\test\resources
+2025-03-05 12:35:17,145 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-03-05 12:35:17,157 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 76 resources from src\main\resources to target\classes
+2025-03-05 12:35:17,306 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\HP\Desktop\cars\Auto_counsel\auto_counsel\src\test\resources
+2025-03-05 12:39:17,017 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-03-05 12:39:17,070 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 76 resources from src\main\resources to target\classes
+2025-03-05 12:39:18,067 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\HP\Desktop\cars\Auto_counsel\auto_counsel\src\test\resources
+2025-03-05 12:39:31,790 [Worker-20: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-03-05 12:39:36,539 [Worker-20: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.autoCounsel:auto_counsel:0.0.1-SNAPSHOT @ C:\Users\HP\Desktop\cars\Auto_counsel\auto_counsel\pom.xml.
+2025-03-05 12:39:38,641 [Worker-20: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auto_counsel/src/main/java
+2025-03-05 12:39:38,647 [Worker-20: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auto_counsel/src/main/resources
+2025-03-05 12:39:38,649 [Worker-20: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auto_counsel/src/main/resources
+2025-03-05 12:39:38,650 [Worker-20: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auto_counsel/src/test/java
+2025-03-05 12:39:38,652 [Worker-20: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auto_counsel/src/test/resources
+2025-03-05 12:39:39,900 [Worker-20: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0.00 sec, refresh facades takes 6.00 sec, update config takes 1.00 sec 
+2025-03-05 12:39:41,111 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-03-05 12:39:41,169 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 76 resources from src\main\resources to target\classes
+2025-03-05 12:39:41,421 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\HP\Desktop\cars\Auto_counsel\auto_counsel\src\test\resources
+2025-03-05 12:42:16,167 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
