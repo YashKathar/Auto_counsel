@@ -4,6 +4,9 @@ package com.autoCounsel.auto_counsel.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,5 +34,12 @@ public class Services {
 			inverseJoinColumns = @JoinColumn(name="garage_id")
 	)
 	private List<Garage> garages;
+
+	@Override
+	public String toString() {
+		return "Services [serviceId=" + serviceId + ", serviceName=" + serviceName + "]";
+	}
+	
+	
 
 }
