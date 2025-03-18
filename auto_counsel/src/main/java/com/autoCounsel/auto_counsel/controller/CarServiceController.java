@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.autoCounsel.auto_counsel.dto.CarServicingDto;
 import com.autoCounsel.auto_counsel.entity.CarServicing;
 import com.autoCounsel.auto_counsel.entity.Garage;
 import com.autoCounsel.auto_counsel.entity.Services;
@@ -24,7 +25,7 @@ import com.autoCounsel.auto_counsel.service.GarageService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes("isAdmin")
+@SessionAttributes({"isAdmin", "userExist"}) 
 @RequestMapping("/carsService")
 public class CarServiceController {
 
@@ -48,34 +49,35 @@ public class CarServiceController {
     		}
     	}
     	model.addAttribute("services", serviceList);
+    	model.addAttribute("carService", new CarServicingDto());
+    	model.addAttribute("garage", garage);
         return "book-service"; 
     }
 
     @PostMapping("/book")
-    public String bookCarService(@ModelAttribute CarServicing carServicing, RedirectAttributes redirectAttributes,HttpSession session) {
-        try {      
+    public String bookCarService(@ModelAttribute CarServicingDto carServicing, RedirectAttributes redirectAttributes,HttpSession session, Model model) {
+        try {       
             
             User loggedInUser = (User) session.getAttribute("user");
-
-            carServicing.setStatus("Confirmed");
-            carServicing.setUser(loggedInUser);
-
-            // Book the service and save it
-            carServicingService.bookCarService(carServicing);
-
-            return "redirect:/carsService/booking-confirmation";
+            
+            if(loggedInUser == null) {
+            	return "redirect:/";  
+            }
+            
+            carServicing.setUserId(loggedInUser.getId());
+            
+//            System.out.println(carServicing);
+            
+            CarServicing car = carServicingService.bookCarService(carServicing, loggedInUser);
+       
+            model.addAttribute("car", car); 
+            return "booking-confirmation";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to book car service: " + e.getMessage());
             return "redirect:/carsService/book-service";
-        }
+        } 
     }
 
-    @GetMapping("/booking-confirmation")
-    public String showConfirmationPage(Model model) {
-        // This page will use the flash attributes to show the confirmation message
-    	System.out.print(model);
-        return "booking-confirmation";
-    }
 
 
     @GetMapping("/view")

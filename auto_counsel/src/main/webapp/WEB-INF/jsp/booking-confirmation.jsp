@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +38,7 @@
         font-size: larger;
     }
 </style>
-
+${car.services}
 <body>
     <div class="container">
         <div class="row">
@@ -44,14 +46,18 @@
                 <div class="border border-light rounded p-4">
                     <h2 class="mb-4 text-center">Service Booking Confirmation</h2>
                     <strong>${message}</strong>
-                    <p><strong>Car Model:</strong> ${carModel}</p>
-                    <p><strong>Car Name:</strong> ${carName}</p>
-                    <p><strong>Service Type:</strong> ${serviceType}</p>
-                    <p><strong>Appointment Date:</strong>
-                        <fmt:formatDate value="${appointmentDate}" pattern="yyyy-MM-dd" var="formattedDate" />
-                        ${appointmentDate}
+                    <p><strong>Car Model:</strong> ${car.carModel}</p>
+                    <p><strong>Car Name:</strong> ${car.carName}</p>
+                    <p><strong>Services:</strong>
+                        <c:forEach items="${car.services}" var="serviceType">
+                            ${serviceType.serviceName},
+                        </c:forEach>
                     </p>
-                    <p><strong>Garage:</strong> ${garage}</p>
+                    <p><strong>Appointment Date:</strong>
+                        <fmt:formatDate value="${car.appointmentDate}" pattern="yyyy-MM-dd" var="formattedDate" />
+                        ${car.appointmentDate}
+                    </p>
+                    <p><strong>Garage:</strong> ${car.garage.garageName}</p>
                     <div class="buttons">
                         <a href="/carsService/book-service" class="btn btn-custom">Book Another Service</a>
                         <a href="/auth/dashboard" class="btn btn-custom">Back to Dashboard</a>

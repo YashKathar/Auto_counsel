@@ -5,8 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,7 +23,7 @@ public class CarServicingDto {
 
     private LocalDate appointmentDate;
 
-    private String garage;
+    private Integer garage;
 
 
 }

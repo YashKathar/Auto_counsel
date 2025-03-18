@@ -47,8 +47,14 @@
 												<option value="hindi">Hindi</option>
 												<option value="farnce">Farnce</option>
 											</select></li>
-										<li class="nav-item"><a class="nav-link Sign_in" href="#"><i class="fa fa-user"
-													aria-hidden="true"></i>Sign in/Sign up</a></li>
+										<c:if test="${!userExist}">	
+												<li class="nav-item "><a class="nav-link orange" href="/">
+													Login</a></li>
+											</c:if>		
+											<c:if test="${userExist}">	
+												<li class="nav-item "><a class="nav-link orange" href="/auth/logout">
+													LogOut</a></li>
+											</c:if>	
 									</ul>
 								</div>
 							</div>
@@ -84,6 +90,7 @@
 											</li>
 											<li class="nav-item "><a class="nav-link orange" href="#">
 													Get Deals</a></li>
+	
 											<c:if test="${isAdmin}">	
 												<li class="nav-item "><a class="nav-link orange" href="/garage/add">
 													Add Garage</a></li>

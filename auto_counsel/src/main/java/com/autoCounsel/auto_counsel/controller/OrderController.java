@@ -25,7 +25,7 @@ import com.autoCounsel.auto_counsel.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes("isAdmin")
+@SessionAttributes({"isAdmin", "userExist"})
 @RequestMapping(value = "/order/")
 @CrossOrigin(origins = "*")
 public class OrderController {

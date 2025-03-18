@@ -38,7 +38,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.val;
 
 @Controller
-@SessionAttributes("isAdmin")
+@SessionAttributes({"isAdmin", "userExist"})
 @RequestMapping("/cars")
 public class CarController {
 

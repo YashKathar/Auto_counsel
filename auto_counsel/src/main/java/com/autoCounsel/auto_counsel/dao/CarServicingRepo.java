@@ -13,6 +13,4 @@ public interface CarServicingRepo extends CrudRepository<CarServicing, Integer> 
 
     List<CarServicing> findByUser(User user); // Fetch all car services for a specific user
 
-
-
 }

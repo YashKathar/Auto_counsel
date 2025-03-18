@@ -91,6 +91,7 @@
                                         placeholder="Enter car name" required aria-label="Car Name">
                                 </div>
 
+
                                 <!-- Garage -->
                                 <%-- <div class="mb-3">
                                     <!-- <label for="garage" class="form-label">Garage</label> -->
@@ -101,41 +102,46 @@
                                             <option value="${garage.id}">${garage.garageName}</option>
                                         </c:forEach>
                                     </select>
-                                </div> --%>
+                        </div> --%>
 
-                                <!-- Service Type -->
-                                <div class="mb-3">
-                                    <div class="selected-options" id="selectedOptions"></div>
+                        <!-- Service Type -->
+                        <div class="mb-3">
+                            <input type="hidden" path="services" id="services" name="services" />
+                            <div class="selected-options" id="selectedOptions"></div>
 
-                                    <div class="dropdown">
-                                        <button class="btn btn-light dropdown-toggle w-100 input-height" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Select Service
-                                        </button>
-                                        <ul class="dropdown-menu service-selector" id="dropdownMenu">
-                                            <c:forEach var="item" items="${services}">
-                                                <li><a class="dropdown-item" href="#"
-                                                        onclick="selectOption('${item.serviceName}')">${item.serviceName}</a>
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
-                                </div>
-
-
-                                <!-- Appointment Date -->
-                                <div class="mb-3">
-                                    <!-- <label for="appointmentDate" class="form-label">Appointment Date</label> -->
-                                    <input type="date" name="appointmentDate" class="form-control input-height"
-                                        id="appointmentDate" required aria-label="Appointment Date">
-                                </div>
-
-                                <!-- Submit Button -->
-                                <button type="submit" class="btn submit-btn w-100 border border-light">Book
-                                    Service</button>
-                            </form>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle w-100 input-height" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Service
+                                </button>
+                                <ul class="dropdown-menu service-selector" id="dropdownMenu">
+                                    <c:forEach var="item" items="${services}">
+                                        <li><a class="dropdown-item" href="#"
+                                                onclick="selectOption('${item.serviceName}')">${item.serviceName}</a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
                         </div>
+
+
+                        <!-- Garage -->
+                        <input type="hidden" path="garage" id="garage" name="garage" value="${garage}" />
+
+
+                        <!-- Appointment Date -->
+                        <div class="mb-3">
+                            <!-- <label for="appointmentDate" class="form-label">Appointment Date</label> -->
+                            <input type="date" name="appointmentDate" class="form-control input-height"
+                                id="appointmentDate" required aria-label="Appointment Date">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn submit-btn w-100 border border-light">Book
+                            Service</button>
+                        </form>
                     </div>
+                </div>
 
                 </div>
 
@@ -143,24 +149,18 @@
 
                     <script>
 
+
                         // Set min date for appointment
                         document.getElementById('appointmentDate').min = new Date().toISOString().split('T')[0];
 
-                        // Form validation
-                        document.getElementById('carServiceForm').addEventListener('submit', function (event) {
-                            let carModel = document.getElementById('carModel').value.trim();
-                            let carName = document.getElementById('carName').value.trim();
-                            let serviceType = document.getElementById('serviceType').value;
-                            let appointmentDate = document.getElementById('appointmentDate').value;
-                            let status = document.getElementById('status').value;
-
-                            if (!carModel || !carName || !serviceType || !appointmentDate || !status) {
-                                alert('Please fill out all required fields.');
-                                event.preventDefault();
-                            }
-                        });
-
                         const selectedOptions = [];
+
+                        let submitBtn = document.querySelector(".submit-btn");
+                        if (selectedOptions.length == 0) {
+                            submitBtn.disabled = true;
+                        } else {
+                            submitBtn.disabled = false;
+                        }
 
                         function selectOption(option) {
                             if (!selectedOptions.includes(option)) {
@@ -170,6 +170,10 @@
                         }
 
                         function updateSelectedOptions() {
+
+                            let values = document.getElementById("services");
+                            values.value = "";
+
                             const selectedOptionsContainer = document.getElementById("selectedOptions");
                             selectedOptionsContainer.innerHTML = "";
 
@@ -178,8 +182,16 @@
                                 tag.classList.add("tag");
                                 tag.innerHTML = option + `<span onclick="removeOption('` + option + `')">&times;</span>`;
                                 console.log(option);
+                                values.value += option + ", ";
                                 selectedOptionsContainer.appendChild(tag);
                             });
+
+                            let submitBtn = document.querySelector(".submit-btn");
+                            if (selectedOptions.length == 0) {
+                                submitBtn.disabled = true;
+                            } else {
+                                submitBtn.disabled = false;
+                            }
                         }
 
                         function removeOption(option) {
@@ -187,6 +199,13 @@
                             if (index !== -1) {
                                 selectedOptions.splice(index, 1);
                                 updateSelectedOptions();
+                            }
+
+                            let submitBtn = document.querySelector(".submit-btn");
+                            if (selectedOptions.length == 0) {
+                                submitBtn.disabled = true;
+                            } else {
+                                submitBtn.disabled = false;
                             }
                         }
 

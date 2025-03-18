@@ -15,7 +15,7 @@ import com.autoCounsel.auto_counsel.service.ServicesService;
 @Controller
 @RequestMapping("/services")
 @CrossOrigin(origins = "*")
-@SessionAttributes("isAdmin")
+@SessionAttributes({"isAdmin", "userExist"})
 public class ServicesController {
 	@Autowired
 	private ServicesService servicesService;

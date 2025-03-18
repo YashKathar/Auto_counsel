@@ -56,7 +56,11 @@
                                 <tr>
                                     <td> ${service.carModel} </td>
                                     <td>${service.carName}</td>
-                                    <td>${service.serviceType}</td>
+                                    <td>
+                                        <c:forEach items="${service.services}" var="serviceType">
+                                            ${serviceType.serviceName},
+                                        </c:forEach>
+                                    </td>
                                     <td>${service.appointmentDate}</td>
                                     <td>${service.status}</td>
                                     <td>${service.garage.garageName}</td>

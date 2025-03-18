@@ -22,7 +22,7 @@ import com.autoCounsel.auto_counsel.entity.Services;
 import com.autoCounsel.auto_counsel.service.GarageService;
 
 @Controller
-@SessionAttributes("isAdmin")
+@SessionAttributes({"isAdmin", "userExist"})
 @RequestMapping("/garage")
 public class GarageController {
 	
@@ -42,16 +42,16 @@ public class GarageController {
 
 		if(result.hasErrors()) {
 			return "redirect:/garage/add";
-		}
-		System.out.println(garage);
+		}  
+//		System.out.println(garage);
 		String s = garage.getServices();
 		s = s.substring(0, s.length()-1);
 		List<String> serviceList = Arrays.stream(s.split(","))
                 .map(String::trim)
                 .collect(Collectors.toList());
-		System.out.println(serviceList);
+//		System.out.println(serviceList);
 		garageService.addGarage(garage, serviceList);
-		return "redirect:/garage/add";
+		return "redirect:/garage/add";    
 	}
 	
 //	

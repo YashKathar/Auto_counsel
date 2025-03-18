@@ -160,19 +160,19 @@
 
                         <c:forEach var="i" begin="0" end="${totalPages - 1}">
                           <c:if test="${i == currentPage}">
-                            <li class="page-item ${i+1 <= totalPages-1 ? 'd-none' : ''}">
+                            <li class="page-item ${i+1 <= totalPages-1 || totalPages < 3 ? 'd-none' : ''}">
                               <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i-2}&pageSize=${pageSize}">${i - 1}</a>
                             </li>
-                            <li class="page-item ${i-1 < 0 ? 'd-none' : ''}">
+                            <li class="page-item ${i-1 < 0 || totalPages < 3  ? 'd-none' : ''}">
                               <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i-1}&pageSize=${pageSize}">${i}</a>
                             </li>
                             <li class="page-item ${currentPage == i ? 'active' : ''}">
                               <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i}&pageSize=${pageSize}">${i + 1}</a>
                             </li>
-                            <li class="page-item ${i+1 > totalPages-1 ? 'd-none' : ''}">
+                            <li class="page-item ${i+1 > totalPages-1 || totalPages < 3  ? 'd-none' : ''}">
                               <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i+1}&pageSize=${pageSize}">${i + 2}</a>
                             </li>
-                            <li class="page-item ${i-1 >= 0 ? 'd-none' : ''}">
+                            <li class="page-item ${i-1 >= 0 || totalPages < 3  ? 'd-none' : ''}">
                               <a class="page-link" href="buyCar?sort=${sort}&pageNumber=${i+2}&pageSize=${pageSize}">${i + 3}</a>
                             </li>
                           </c:if>
